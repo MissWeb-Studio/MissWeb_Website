@@ -1,9 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="static\images\favicon.png">
+
     <title>Development Process | Miss Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -13,25 +14,42 @@
             color: #e5e7eb; 
             font-family: 'Inter', sans-serif;
         }
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 8px; height: 4px; }
         ::-webkit-scrollbar-track { background: #1a1a1a; }
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+
+        .fade-right {
+            mask-image: linear-gradient(to right, black 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+        }
+
+        /* Hide scrollbar for mobile sticky nav but keep functionality */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Top Navigation / Back Button -->
-    <nav class="max-w-7xl mx-auto px-6 py-8">
-        <a href="/" class="text-gray-400 hover:text-white transition-colors duration-300 font-medium inline-flex items-center">
+    <nav class="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
+        <a href="/" class="text-gray-400 hover:text-white transition-colors duration-300 font-medium inline-flex items-center text-sm md:text-base">
             <i class="fas fa-arrow-left mr-2"></i> Back to Main Site
         </a>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-6 pb-24 grid grid-cols-1 lg:grid-cols-4 gap-12">
+    <!-- Cleaned Mobile Navigation Bar with Bottom Bar Indicators -->
+    <div class="block lg:hidden sticky top-0 z-30 bg-[#1a1a1a]/95 backdrop-blur-md border-b border-gray-800 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide shadow-lg fade-right">
+        <div class="flex space-x-6 px-4 pt-4">
+            <a href="#discovery" class="mobile-nav-link pb-3 text-sm font-medium border-b-2 border-transparent text-gray-400 transition-all duration-300">1. Discovery</a>
+            <a href="#prototype" class="mobile-nav-link pb-3 text-sm font-medium border-b-2 border-transparent text-gray-400 transition-all duration-300">2. Prototype</a>
+            <a href="#development" class="mobile-nav-link pb-3 text-sm font-medium border-b-2 border-transparent text-gray-400 transition-all duration-300">3. Development</a>
+            <a href="#launch" class="mobile-nav-link pb-3 text-sm font-medium border-b-2 border-transparent text-gray-400 transition-all duration-300">4. Launch</a>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 md:px-6 pb-24 grid grid-cols-1 lg:grid-cols-4 gap-8 md:gap-12">
         
-        <!-- Sticky Sidebar Menu -->
-        <aside class="lg:col-span-1 hidden md:block">
+        <aside class="lg:col-span-1 hidden lg:block">
             <div class="sticky top-10 flex flex-col space-y-5 border-l-2 border-gray-800 pl-5">
                 <span class="text-xs uppercase tracking-widest text-gray-500 font-bold mb-2">The Roadmap</span>
                 <a href="#discovery" class="text-blue-400 hover:text-blue-300 transition-colors font-medium">1. Discovery</a>
@@ -41,109 +59,102 @@
             </div>
         </aside>
 
-        <!-- Main Documentation Content -->
-        <main class="lg:col-span-3 space-y-20">
+        <main class="lg:col-span-3 space-y-16 md:space-y-20">
             
-            <!-- Header -->
-            <section id="overview" class="scroll-mt-10">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">How We Work</h1>
-                <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-3xl">
+            <section id="overview" class="scroll-mt-24 md:scroll-mt-10">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">How We Work</h1>
+                <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-3xl">
                     Transparency and structure are the foundations of a successful digital project. This document outlines the exact journey we take from your initial idea to a fully deployed, high-performance web application.
                 </p>
             </section>
 
-            <!-- 1. Discovery -->
-            <section id="discovery" class="scroll-mt-10 border-t border-blue-900/30 pt-16">
-                <h2 class="text-3xl font-bold text-blue-400 mb-6 flex items-center">
-                    <span class="w-10 h-10 bg-blue-900/30 text-blue-400 rounded-full flex items-center justify-center mr-4 text-xl border border-blue-500/30">1</span>
+            <section id="discovery" class="scroll-mt-24 md:scroll-mt-10 border-t border-blue-900/30 pt-12 md:pt-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-blue-400 mb-6 flex items-center">
+                    <span class="w-10 h-10 shrink-0 bg-blue-900/30 text-blue-400 rounded-full flex items-center justify-center mr-4 text-xl border border-blue-500/30">1</span>
                     Discovery & Alignment
                 </h2>
-                <div class="space-y-4 text-gray-400 leading-relaxed">
+                <div class="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed">
                     <p>
                         Every great build starts with a solid foundation. In this phase, we align on your vision, target audience, and business goals, mapping out the exact technical requirements needed to succeed.
                     </p>
                     
-                    <div class="bg-gray-900/50 p-6 rounded-xl border border-blue-900/20 my-6">
-                        <h4 class="text-white font-semibold flex items-center mb-4"><i class="fas fa-search text-blue-400 mr-2"></i> Key Deliverables</h4>
+                    <div class="bg-gray-900/50 p-5 md:p-6 rounded-xl border border-blue-900/20 my-6 shadow-xl">
+                        <h4 class="text-white font-semibold flex items-center mb-4"><i class="fas fa-search text-blue-400 mr-2 shrink-0"></i> Key Deliverables</h4>
                         <ul class="list-none space-y-3">
-                            <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> <span><strong>Initial Consultation:</strong> A deep dive into your brand's core identity and objectives.</span></li>
-                            <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> <span><strong>Technical Scoping:</strong> Determining the required stack (e.g., E-commerce capabilities, custom database integrations, API connections).</span></li>
-                            <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> <span><strong>Project Timeline & Quote:</strong> Delivery of a transparent, fixed-price proposal and a realistic development schedule.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-1 mr-3 shrink-0"></i> <span><strong>Initial Consultation:</strong> A deep dive into your brand's core identity and objectives.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-1 mr-3 shrink-0"></i> <span><strong>Technical Scoping:</strong> Determining the required stack (e.g., E-commerce capabilities, custom database integrations, API connections).</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-1 mr-3 shrink-0"></i> <span><strong>Project Timeline & Quote:</strong> Delivery of a transparent, fixed-price proposal and a realistic development schedule.</span></li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- 2. Prototype -->
-            <section id="prototype" class="scroll-mt-10 border-t border-purple-900/30 pt-16">
-                <h2 class="text-3xl font-bold text-purple-400 mb-6 flex items-center">
-                    <span class="w-10 h-10 bg-purple-900/30 text-purple-400 rounded-full flex items-center justify-center mr-4 text-xl border border-purple-500/30">2</span>
+            <section id="prototype" class="scroll-mt-24 md:scroll-mt-10 border-t border-purple-900/30 pt-12 md:pt-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-purple-400 mb-6 flex items-center">
+                    <span class="w-10 h-10 shrink-0 bg-purple-900/30 text-purple-400 rounded-full flex items-center justify-center mr-4 text-xl border border-purple-500/30">2</span>
                     Prototype & Design
                 </h2>
-                <div class="space-y-4 text-gray-400 leading-relaxed">
+                <div class="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed">
                     <p>
                         Before we write a single line of code, we visualize the structure. This ensures the user flow is intuitive and the aesthetics perfectly match your brand's identity, saving time during the engineering phase.
                     </p>
                     
-                    <div class="bg-gray-900/50 p-6 rounded-xl border border-purple-900/20 my-6">
-                        <h4 class="text-white font-semibold flex items-center mb-4"><i class="fas fa-pencil-ruler text-purple-400 mr-2"></i> Key Deliverables</h4>
+                    <div class="bg-gray-900/50 p-5 md:p-6 rounded-xl border border-purple-900/20 my-6 shadow-xl">
+                        <h4 class="text-white font-semibold flex items-center mb-4"><i class="fas fa-pencil-ruler text-purple-400 mr-2 shrink-0"></i> Key Deliverables</h4>
                         <ul class="list-none space-y-3">
-                            <li class="flex items-start"><i class="fas fa-check text-purple-500 mt-1 mr-3"></i> <span><strong>Wireframing:</strong> Establishing the skeletal framework and navigation logic of the platform.</span></li>
-                            <li class="flex items-start"><i class="fas fa-check text-purple-500 mt-1 mr-3"></i> <span><strong>UI/UX Mockups:</strong> Applying color theory, typography, and visual assets to create a high-fidelity preview.</span></li>
-                            <li class="flex items-start"><i class="fas fa-check text-purple-500 mt-1 mr-3"></i> <span><strong>Client Sign-off:</strong> A collaborative feedback loop allowing you to request design adjustments before development begins.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-purple-500 mt-1 mr-3 shrink-0"></i> <span><strong>Wireframing:</strong> Establishing the skeletal framework and navigation logic of the platform.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-purple-500 mt-1 mr-3 shrink-0"></i> <span><strong>UI/UX Mockups:</strong> Applying color theory, typography, and visual assets to create a high-fidelity preview.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-purple-500 mt-1 mr-3 shrink-0"></i> <span><strong>Client Sign-off:</strong> A collaborative feedback loop allowing you to request design adjustments before development begins.</span></li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- 3. Development -->
-            <section id="development" class="scroll-mt-10 border-t border-emerald-900/30 pt-16">
-                <h2 class="text-3xl font-bold text-emerald-400 mb-6 flex items-center">
-                    <span class="w-10 h-10 bg-emerald-900/30 text-emerald-400 rounded-full flex items-center justify-center mr-4 text-xl border border-emerald-500/30">3</span>
+            <section id="development" class="scroll-mt-24 md:scroll-mt-10 border-t border-emerald-900/30 pt-12 md:pt-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-emerald-400 mb-6 flex items-center">
+                    <span class="w-10 h-10 shrink-0 bg-emerald-900/30 text-emerald-400 rounded-full flex items-center justify-center mr-4 text-xl border border-emerald-500/30">3</span>
                     Engineering & Development
                 </h2>
-                <div class="space-y-4 text-gray-400 leading-relaxed">
+                <div class="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed">
                     <p>
                         This is where the heavy lifting happens. We translate the approved prototype into clean, modular, and high-performing code. Our architecture focuses on speed, responsiveness, and robust security.
                     </p>
                     
-                    <div class="bg-gray-900/50 p-6 rounded-xl border border-emerald-900/20 my-6">
-                        <h4 class="text-white font-semibold flex items-center mb-4"><i class="fas fa-code text-emerald-400 mr-2"></i> Key Deliverables</h4>
+                    <div class="bg-gray-900/50 p-5 md:p-6 rounded-xl border border-emerald-900/20 my-6 shadow-xl">
+                        <h4 class="text-white font-semibold flex items-center mb-4"><i class="fas fa-code text-emerald-400 mr-2 shrink-0"></i> Key Deliverables</h4>
                         <ul class="list-none space-y-3">
-                            <li class="flex items-start"><i class="fas fa-check text-emerald-500 mt-1 mr-3"></i> <span><strong>Frontend Construction:</strong> Translating designs into responsive interfaces that look flawless on desktop, tablet, and mobile.</span></li>
-                            <li class="flex items-start"><i class="fas fa-check text-emerald-500 mt-1 mr-3"></i> <span><strong>Backend Systems:</strong> Setting up secure databases, user authentication loops, and dynamic content management engines.</span></li>
-                            <li class="flex items-start"><i class="fas fa-check text-emerald-500 mt-1 mr-3"></i> <span><strong>Third-Party Integrations:</strong> Hooking up payment gateways (e.g., PayFast/Yoco), APIs, or analytics tracking.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-500 mt-1 mr-3 shrink-0"></i> <span><strong>Frontend Construction:</strong> Translating designs into responsive interfaces that look flawless on desktop, tablet, and mobile.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-500 mt-1 mr-3 shrink-0"></i> <span><strong>Backend Systems:</strong> Setting up secure databases, user authentication loops, and dynamic content management engines.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-500 mt-1 mr-3 shrink-0"></i> <span><strong>Third-Party Integrations:</strong> Hooking up payment gateways (e.g., PayFast/Yoco), APIs, or analytics tracking.</span></li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. Launch -->
-            <section id="launch" class="scroll-mt-10 border-t border-amber-900/30 pt-16">
-                <h2 class="text-3xl font-bold text-amber-400 mb-6 flex items-center">
-                    <span class="w-10 h-10 bg-amber-900/30 text-amber-400 rounded-full flex items-center justify-center mr-4 text-xl border border-amber-500/30">4</span>
+            <section id="launch" class="scroll-mt-24 md:scroll-mt-10 border-t border-amber-900/30 pt-12 md:pt-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-amber-400 mb-6 flex items-center">
+                    <span class="w-10 h-10 shrink-0 bg-amber-900/30 text-amber-400 rounded-full flex items-center justify-center mr-4 text-xl border border-amber-500/30">4</span>
                     Testing & Launch
                 </h2>
-                <div class="space-y-4 text-gray-400 leading-relaxed">
+                <div class="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed">
                     <p>
                         Before introducing your platform to the world, we subject it to rigorous testing. Once everything is verified, we orchestrate the deployment to your live servers and officially hand over the digital keys.
                     </p>
                     
-                    <div class="bg-gray-900/50 p-6 rounded-xl border border-amber-900/20 my-6">
-                        <h4 class="text-white font-semibold flex items-center mb-4"><i class="fas fa-rocket text-amber-400 mr-2"></i> Key Deliverables</h4>
+                    <div class="bg-gray-900/50 p-5 md:p-6 rounded-xl border border-amber-900/20 my-6 shadow-xl">
+                        <h4 class="text-white font-semibold flex items-center mb-4"><i class="fas fa-rocket text-amber-400 mr-2 shrink-0"></i> Key Deliverables</h4>
                         <ul class="list-none space-y-3">
-                            <li class="flex items-start"><i class="fas fa-check text-amber-500 mt-1 mr-3"></i> <span><strong>QA & Optimization:</strong> Cross-browser testing, mobile responsiveness checks, and speed optimizations.</span></li>
-                            <li class="flex items-start"><i class="fas fa-check text-amber-500 mt-1 mr-3"></i> <span><strong>Domain & Server Deployment:</strong> Configuring DNS records and pushing the final build to the live hosting environment.</span></li>
-                            <li class="flex items-start"><i class="fas fa-check text-amber-500 mt-1 mr-3"></i> <span><strong>Handover & Support:</strong> Supplying administrative credentials, system documentation, and transitioning you to either Self-Managed or Miss Web Managed status.</span></li>
+                            <li class="fas items-start"><i class="fas fa-check text-amber-500 mt-1 mr-3 shrink-0"></i> <span><strong>QA & Optimization:</strong> Cross-browser testing, mobile responsiveness checks, and speed optimizations.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-amber-500 mt-1 mr-3 shrink-0"></i> <span><strong>Domain & Server Deployment:</strong> Configuring DNS records and pushing the final build to the live hosting environment.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-amber-500 mt-1 mr-3 shrink-0"></i> <span><strong>Handover & Support:</strong> Supplying administrative credentials, system documentation, and transitioning you to either Self-Managed or Miss Web Managed status.</span></li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Call to Action -->
-            <div class="pt-16 pb-8 text-center border-t border-gray-800 mt-16">
-                <h3 class="text-2xl font-bold text-white mb-6">Ready to start the journey?</h3>
-                <a href="/#contact" class="inline-block bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-gray-200 transition-transform duration-300 hover:scale-105 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+            <div class="pt-12 md:pt-16 pb-8 text-center border-t border-gray-800 mt-12 md:mt-16">
+                <h3 class="text-xl md:text-2xl font-bold text-white mb-6">Ready to start the journey?</h3>
+                <a href="/#contact" class="inline-block bg-white text-black px-8 md:px-10 py-3.5 md:py-4 rounded-full font-bold hover:bg-gray-200 transition-transform duration-300 hover:scale-105 shadow-[0_0_15px_rgba(255,255,255,0.2)] text-sm md:text-base w-full sm:w-auto">
                     Initiate Your Project
                 </a>
             </div>
@@ -151,6 +162,54 @@
         </main>
     </div>
 
+    <!-- Active Indicator Bar Scroll-Spy Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+            // Category classes to swap standard underlines for precise accent bars and micro-glows
+            const barStyles = {
+                'discovery': ['text-blue-400', 'border-blue-500', 'bg-blue-500/5'],
+                'prototype': ['text-purple-400', 'border-purple-500', 'bg-purple-500/5'],
+                'development': ['text-emerald-400', 'border-emerald-500', 'bg-emerald-500/5'],
+                'launch': ['text-amber-400', 'border-amber-500', 'bg-amber-500/5']
+            };
+
+            const options = {
+                root: null,
+                rootMargin: '-25% 0px -55% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.getAttribute('id');
+                        
+                        navLinks.forEach(link => {
+                            const targetId = link.getAttribute('href').slice(1);
+                            
+                            if (targetId === activeId) {
+                                if (barStyles[activeId]) {
+                                    link.classList.add(...barStyles[activeId]);
+                                    link.classList.remove('text-gray-400', 'border-transparent');
+                                }
+                                // Center scroll container smoothly onto active tab line
+                                link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                            } else {
+                                if (barStyles[targetId]) {
+                                    link.classList.remove(...barStyles[targetId]);
+                                    link.classList.add('text-gray-400', 'border-transparent');
+                                }
+                            }
+                        });
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
 </body>
 </html>
-

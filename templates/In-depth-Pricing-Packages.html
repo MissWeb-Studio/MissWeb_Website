@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="static\images\favicon.png">
+
     <title>Package Documentation | Miss Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -12,31 +14,49 @@
             color: #e5e7eb; 
             font-family: 'Inter', sans-serif;
         }
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 8px; height: 4px; }
         ::-webkit-scrollbar-track { background: #1a1a1a; }
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+
+        .fade-right {
+            mask-image: linear-gradient(to right, black 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+        }
+        
+        /* Hide scrollbar for mobile sticky nav but keep functionality */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Top Navigation / Back Button -->
-    <nav class="max-w-7xl mx-auto px-6 py-8">
-        <a href="/" class="text-gray-400 hover:text-white transition-colors duration-300 font-medium inline-flex items-center">
+    <nav class="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
+        <a href="/" class="text-gray-400 hover:text-white transition-colors duration-300 font-medium inline-flex items-center text-sm md:text-base">
             <i class="fas fa-arrow-left mr-2"></i> Back to Main Site
         </a>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-6 pb-24 grid grid-cols-1 lg:grid-cols-4 gap-12">
+    <!-- Cleaned Mobile Navigation Bar with Underline Indicators -->
+    <div class="block lg:hidden sticky top-0 z-30 bg-[#1a1a1a]/95 backdrop-blur-md border-b border-gray-800 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide shadow-lg fade-right">
+        <div class="flex space-x-6 px-4 pt-4">
+            <a href="#overview" class="mobile-nav-link pb-3 text-sm font-medium border-b-2 border-transparent text-gray-400 transition-all duration-300">Overview</a>
+            <a href="#free-tier" class="mobile-nav-link pb-3 text-sm font-medium border-b-2 border-transparent text-gray-400 transition-all duration-300">Free-Tier</a>
+            <a href="#self-managed" class="mobile-nav-link pb-3 text-sm font-medium border-b-2 border-transparent text-gray-400 transition-all duration-300">Self-Managed</a>
+            <a href="#managed" class="mobile-nav-link pb-3 text-sm font-medium border-b-2 border-transparent text-gray-400 transition-all duration-300">Managed</a>
+            <a href="#estimates" class="mobile-nav-link pb-3 text-sm font-medium border-b-2 border-transparent text-gray-400 transition-all duration-300">Cost Estimator</a>
+            <a href="#addons" class="mobile-nav-link pb-3 text-sm font-medium border-b-2 border-transparent text-gray-400 transition-all duration-300">Add-Ons</a>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 md:px-6 pb-24 grid grid-cols-1 lg:grid-cols-4 gap-8 md:gap-12">
         
-        <!-- Sticky Sidebar Menu -->
-        <aside class="lg:col-span-1 hidden md:block">
+        <aside class="lg:col-span-1 hidden lg:block">
             <div class="sticky top-10 flex flex-col space-y-5 border-l-2 border-gray-800 pl-5">
 
-                <!-- Download Button -->
-                <a href="https://www.dropbox.com/scl/fi/q2ajx2s877ag2orre48x7/MissWeb-Package-Specifications.pdf?rlkey=488lrh57dmf77hciagm17zv2c&st=wi6rz0lm&dl=0" target="_blank" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center justify-center mb-6">
-                    <i class="fas fa-file-pdf mr-2"></i> Download Specifications PDF
-                </a>
+               <a href="static/images/MissWeb-Package-Specifications.pdf" target="_blank" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center justify-center mb-6 shadow-lg shadow-indigo-900/20">
+    <i class="fas fa-file-pdf mr-2"></i> View Specs PDF
+</a>
 
                 <span class="text-xs uppercase tracking-widest text-gray-500 font-bold mb-2">Documentation</span>
                 <a href="#overview" class="text-gray-300 hover:text-white transition-colors font-medium">Overview</a>
@@ -49,248 +69,207 @@
             </div>
         </aside>
 
-        <!-- Main Documentation Content -->
-        <main class="lg:col-span-3 space-y-20">
+        <main class="lg:col-span-3 space-y-16 md:space-y-20">
             
-            <!-- Header & Comparison Table -->
-            <section id="overview" class="scroll-mt-10">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Package Specifications</h1>
-                <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-3xl">
+            <div class="block lg:hidden mb-8">
+                <a href="static/images/MissWeb-Package-Specifications.pdf" target="_blank" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-center shadow-lg shadow-indigo-900/20 w-full">
+        <i class="fas fa-file-pdf mr-2 text-lg"></i> View Specifications PDF
+    </a>
+            </div>
+
+            <section id="overview" class="scroll-mt-24 md:scroll-mt-10">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Package Specifications</h1>
+                <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-3xl">
                     Detailed breakdown of features, technical limits, and operational boundaries for Miss Web service tiers. Review the terms below to ensure you select the right infrastructure for your business.
                 </p>
 
-                <div class="overflow-x-auto bg-gray-900 rounded-lg border border-gray-800">
-                    <table class="w-full text-left text-sm">
+                <div class="overflow-x-auto bg-gray-900 rounded-lg border border-gray-800 shadow-xl">
+                    <table class="w-full text-left text-xs md:text-sm whitespace-nowrap min-w-max">
                         <thead class="bg-gray-800 text-gray-300 border-b border-gray-700">
                             <tr>
-                                <th class="px-6 py-4 font-semibold">Feature Scope</th>
-                                <th class="px-6 py-4 font-semibold text-emerald-400">Free-Tier</th>
-                                <th class="px-6 py-4 font-semibold text-blue-400">Self-Managed</th>
-                                <th class="px-6 py-4 font-semibold text-purple-400">Managed</th>
+                                <th class="px-4 md:px-6 py-4 font-semibold">Feature Scope</th>
+                                <th class="px-4 md:px-6 py-4 font-semibold text-emerald-400">Free-Tier</th>
+                                <th class="px-4 md:px-6 py-4 font-semibold text-blue-400">Self-Managed</th>
+                                <th class="px-4 md:px-6 py-4 font-semibold text-purple-400">Managed</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-800">
                             <tr class="hover:bg-gray-800/50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-300">Hosting Infrastructure</td>
-                                <td class="px-6 py-4 text-gray-400">Shared cloud ecosystem</td>
-                                <td class="px-6 py-4 text-gray-400">Premium Dedicated / Cloud (Client Billed)</td>
-                                <td class="px-6 py-4 text-gray-400">Premium Managed Cloud (All-Inclusive)</td>
+                                <td class="px-4 md:px-6 py-4 font-medium text-gray-300">Hosting Infrastructure</td>
+                                <td class="px-4 md:px-6 py-4 text-gray-400">Shared cloud ecosystem</td>
+                                <td class="px-4 md:px-6 py-4 text-gray-400">Premium Dedicated / Cloud</td>
+                                <td class="px-4 md:px-6 py-4 text-gray-400">Premium Managed Cloud</td>
                             </tr>
                             <tr class="hover:bg-gray-800/50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-300">Domain Name</td>
-                                <td class="px-6 py-4 text-gray-400">Platform Subdomain</td>
-                                <td class="px-6 py-4 text-gray-400">Custom (Client Billed)</td>
-                                <td class="px-6 py-4 text-gray-400">Custom (All-Inclusive)</td>
+                                <td class="px-4 md:px-6 py-4 font-medium text-gray-300">Domain Name</td>
+                                <td class="px-4 md:px-6 py-4 text-gray-400">Platform Subdomain</td>
+                                <td class="px-4 md:px-6 py-4 text-gray-400">Custom (Client Billed)</td>
+                                <td class="px-4 md:px-6 py-4 text-gray-400">Custom (All-Inclusive)</td>
                             </tr>
                             <tr class="hover:bg-gray-800/50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-300">Post-Launch Support</td>
-                                <td class="px-6 py-4 text-gray-400">Standard Hourly Rate</td>
-                                <td class="px-6 py-4 text-gray-400">Standard Hourly Rate</td>
-                                <td class="px-6 py-4 text-gray-400">Up to 2hrs / month </td>
+                                <td class="px-4 md:px-6 py-4 font-medium text-gray-300">Post-Launch Support</td>
+                                <td class="px-4 md:px-6 py-4 text-gray-400">Standard Hourly Rate</td>
+                                <td class="px-4 md:px-6 py-4 text-gray-400">Standard Hourly Rate</td>
+                                <td class="px-4 md:px-6 py-4 text-gray-400">Up to 2hrs / month </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- Free Tier Deploy -->
-            <section id="free-tier" class="scroll-mt-10 border-t border-emerald-900/30 pt-16">
-                <h2 class="text-3xl font-bold text-emerald-400 mb-6"><i class="fas fa-tools mr-3"></i> Free-Tier Deploy</h2>
-                <div class="space-y-4 text-gray-400 leading-relaxed">
+            <section id="free-tier" class="scroll-mt-24 md:scroll-mt-10 border-t border-emerald-900/30 pt-12 md:pt-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-emerald-400 mb-6"><i class="fas fa-tools mr-3"></i> Free-Tier Deploy</h2>
+                <div class="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed">
                     <p>
                         Designed specifically for rapid prototyping, digital resumes, portfolio showcases, or zero-budget startups. Under this agreement, you exclusively pay for our development labor, completely bypassing monthly recurring infrastructure charges.
                     </p>
                     <p>
                         <strong>Visual Presentation:</strong> Your final production website will look identical, operate just as beautifully, and keep the exact same clean design rules as any premium enterprise website. The only difference is the address and platform restrictions under the hood.
                     </p>
-                    <ul class="list-disc list-inside space-y-3 mt-4 ml-2">
+                    <ul class="list-disc list-inside space-y-3 mt-4 ml-1 md:ml-2">
                         <li>
-                            <strong>Technical Stack Limits:</strong> The platform relies strictly on the non-paid public ecosystems of <a href="https://vercel.com/docs/plans/hobby" target="_blank" class="text-emerald-400 hover:underline inline-flex items-center">Vercel Plans <i class="fas fa-external-link-alt text-[10px] ml-1"></i></a> ,<a href="https://docs.github.com/en/pages" target="_blank" class="text-emerald-400 hover:underline inline-flex items-center">GitHub Pages Architecture <i class="fas fa-external-link-alt text-[10px] ml-1"></i></a> or <a href="https://render.com/docs/free" target="_blank" class="text-emerald-400 hover:underline inline-flex items-center">Render Plans <i class="fas fa-external-link-alt text-[10px] ml-1"></i></a>. As a consequence, you will not have a generic standalone dot-com url. Instead, your brand is linked directly to the hosting extension (e.g., <code class="bg-gray-800 text-emerald-300 px-1.5 py-0.5 rounded">yourbrand.vercel.app</code> or <code class="bg-gray-800 text-emerald-300 px-1.5 py-0.5 rounded">yourname.github.io</code>).
+                            <strong>Technical Stack Limits:</strong> The platform relies strictly on the non-paid public ecosystems of <a href="https://vercel.com/docs/plans/hobby" target="_blank" class="text-emerald-400 hover:underline inline-flex items-center flex-wrap">Vercel Plans <i class="fas fa-external-link-alt text-[10px] ml-1"></i></a> ,<a href="https://docs.github.com/en/pages" target="_blank" class="text-emerald-400 hover:underline inline-flex items-center flex-wrap">GitHub Pages <i class="fas fa-external-link-alt text-[10px] ml-1"></i></a> or <a href="https://render.com/docs/free" target="_blank" class="text-emerald-400 hover:underline inline-flex items-center flex-wrap">Render Plans <i class="fas fa-external-link-alt text-[10px] ml-1"></i></a>. As a consequence, you will not have a generic standalone dot-com url. Instead, your brand is linked directly to the hosting extension (e.g., <code class="bg-gray-800 text-emerald-300 px-1.5 py-0.5 rounded break-all">yourbrand.vercel.app</code>).
                         </li>
                         <li>
-                            <strong>Performance Behaviors:</strong> Sites can experience minor latency issues known as <a href="https://vercel.com/docs/functions/serverless-functions/concepts#cold-starts" target="_blank" class="text-emerald-400 hover:underline inline-flex items-center font-semibold">cold-starts <i class="fas fa-external-link-alt text-[10px] ml-1"></i></a>. If your platform receives no visitors for an extended period, the underlying free server sleeps. The next incoming user will experience a temporary 2 to 5-second delay while the environment boots back up. Bandwidth limits and file uploads are rigidly capped by the provider.
+                            <strong>Performance Behaviors:</strong> Sites can experience minor latency issues known as <a href="https://vercel.com/docs/functions/serverless-functions/concepts#cold-starts" target="_blank" class="text-emerald-400 hover:underline inline-flex items-center font-semibold">cold-starts <i class="fas fa-external-link-alt text-[10px] ml-1"></i></a>. If your platform receives no visitors for an extended period, the underlying free server sleeps. 
                         </li>
                         <li>
-                            <strong>Maintenance Restrictions:</strong> Hand-off is immediate upon deployment. No ongoing security monitors, core software upgrades, or text alterations are provided by Miss Web without transitioning to a dedicated hourly development invoice.
+                            <strong>Maintenance Restrictions:</strong> Hand-off is immediate upon deployment. No ongoing security monitors, core software upgrades, or text alterations are provided by Miss Web without transitioning to a dedicated hourly invoice.
                         </li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Self-Managed -->
-            <section id="self-managed" class="scroll-mt-10 border-t border-blue-900/30 pt-16">
-                <h2 class="text-3xl font-bold text-blue-400 mb-6"><i class="fas fa-bicycle mr-3"></i> Self-Managed</h2>
-                <div class="space-y-4 text-gray-400 leading-relaxed">
+            <section id="self-managed" class="scroll-mt-24 md:scroll-mt-10 border-t border-blue-900/30 pt-12 md:pt-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-blue-400 mb-6"><i class="fas fa-bicycle mr-3"></i> Self-Managed</h2>
+                <div class="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed">
                     <p>
                         A solid blueprint for established startups or small businesses that want an absolute professional web presence, a dedicated URL, and zero server caps, but possess the internal operational capacity to process their own server billing and system maintenance.
                     </p>
                     
-                    <div class="bg-gray-900/50 p-6 rounded-xl border border-gray-800 my-6 space-y-4">
+                    <div class="bg-gray-900/50 p-5 md:p-6 rounded-xl border border-gray-800 my-6 space-y-4">
                         <h4 class="text-white font-semibold flex items-center"><i class="fas fa-server mr-2 text-blue-400"></i> Infrastructure Cost Breakdown</h4>
                         <p>
                             <strong>Premium Hosting Scalability:</strong> Your real-world monthly costs directly correlate to user traffic volume and app design complexity. For standard informational profiles or local trade portals, you can easily secure trusted, cheap web hosting starting around <strong>+-R100 monthly</strong>. 
                         </p>
-                        <p class="text-sm text-gray-400 pl-4 border-l-2 border-gray-700">
-                            <em>Example Complexities:</em> If you decide to scale into an extensive Multi-vendor Marketplace or a complex Real Estate portal handling thousands of active concurrent image searches, data demands increase. Hosting prices would likely scale to +-R350 or up to R1,200+ monthly for a Virtual Private Server (VPS). For reliable web setups, we use trusted providers like <a href="https://hostafrica.co.za/hosting/web-hosting/" target="_blank" class="text-blue-400 hover:underline">HostAfrica</a> or local environments such as <a href="https://xneelo.co.za/web-hosting/" target="_blank" class="text-blue-400 hover:underline">Xneelo</a>.
+                        <p class="text-xs md:text-sm text-gray-400 pl-3 md:pl-4 border-l-2 border-gray-700">
+                            <em>Example Complexities:</em> If you decide to scale into an extensive Multi-vendor Marketplace or a complex Real Estate portal handling thousands of active concurrent image searches, data demands increase. Hosting prices would likely scale to +-R350 or up to R1,200+ monthly for a VPS.
                         </p>
 
                         <p>
-                            <strong>Domain Extension Variations:</strong> To route visitors to your site, you will need to buy a domain. Extensions feature vastly different price tags. A typical South African localized extension (<span class="text-white font-mono">.co.za</span>) or common business choices sit stably at around <strong>+-R120 yearly</strong>. 
-                        </p>
-                        <p class="text-sm text-gray-400 pl-4 border-l-2 border-gray-700">
-                            <em>Example Extensions:</em> Standard regional paths like <span class="text-white">.co.za</span> run cheap at R100–R150/year. Global target paths such as <span class="text-white">.com</span> or tech variants like <span class="text-white">.net</span> often sit around R250 to R400+ yearly. Premium boutique endings like <span class="text-white">.ai</span> or <span class="text-white">.studio</span> can easily scale past R1,500/year. You can buy these via top domain registrars like <a href="https://www.domains.co.za" target="_blank" class="text-blue-400 hover:underline">Domains.co.za</a>.
+                            <strong>Domain Extension Variations:</strong> To route visitors to your site, you will need to buy a domain. Extensions feature vastly different price tags. A typical South African localized extension (<span class="text-white font-mono break-words">.co.za</span>) or common business choices sit stably at around <strong>+-R120 yearly</strong>. 
                         </p>
                     </div>
 
-                    <ul class="list-disc list-inside space-y-2 ml-2">
-                        <li><strong>Free Tier Option:</strong> Users have the flexibility to pair a custom domain with free hosting, or pair a premium hosting plan with a platform-provided subdomain. Combining a free hosting service with a free domain registration is not supported; such configurations are exclusively reserved for the full Free Tier package.</li>
-                        <li><strong>System Handover:</strong> Upon full project sign-off, our technical team safely moves all domain registrars and third-party host control panels over to your identity, directly linking your personal payment card.</li>
-                        <li><strong>Operational Support:</strong> Miss Web steps back post-launch. Future debugging, server errors, or theme amendments require a clean work order evaluated under our standard hourly development pricing.</li>
+                    <ul class="list-disc list-inside space-y-2 ml-1 md:ml-2">
+                        <li><strong>Free Tier Option:</strong> Users have the flexibility to pair a custom domain with free hosting, or pair a premium hosting plan with a platform-provided subdomain.</li>
+                        <li><strong>System Handover:</strong> Upon full project sign-off, our technical team safely moves all domain registrars and third-party host control panels over to your identity.</li>
+                        <li><strong>Operational Support:</strong> Miss Web steps back post-launch. Future debugging, server errors, or theme amendments require a clean work order.</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Miss Web Managed -->
-            <section id="managed" class="scroll-mt-10 border-t border-purple-900/30 pt-16">
-                <h2 class="text-3xl font-bold text-purple-400 mb-6"><i class="fas fa-crown mr-3"></i> Miss Web Managed</h2>
-                <div class="space-y-4 text-gray-400 leading-relaxed">
+            <section id="managed" class="scroll-mt-24 md:scroll-mt-10 border-t border-purple-900/30 pt-12 md:pt-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-purple-400 mb-6"><i class="fas fa-crown mr-3"></i> Miss Web Managed</h2>
+                <div class="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed">
                     <p>
                         Our signature white-glove "Subscription Hub". We take over technical administration, coordinate server updates, monitor firewall defense grids, and deploy text or asset modifications so your focus remains on expanding operations.
                     </p>
 
-                    <div class="bg-gray-900/50 p-6 rounded-xl border border-purple-900/20 my-6 space-y-4">
-                        <h4 class="text-white font-semibold flex items-center"><i class="fas fa-calculator mr-2 text-purple-400"></i> Maintenance Subscription Formula & Caps</h4>
+                    <div class="bg-gray-900/50 p-5 md:p-6 rounded-xl border border-purple-900/20 my-6 space-y-4 shadow-xl">
+                        <h4 class="text-white font-semibold flex items-center"><i class="fas fa-calculator mr-2 text-purple-400"></i> Maintenance Subscription Formula</h4>
                         <p>
-                            The entry base price for this managed service rests at <strong>R550 monthly</strong>. This flat fee is explicitly divided to allow Miss Web to systematically handle your domain subscription monthly on your behalf along with your recurring premium hosting subscription fees.
+                            The entry base price for this managed service rests at <strong>R550 monthly</strong>. This flat fee is explicitly divided to allow Miss Web to systematically handle your domain subscription monthly on your behalf along with your recurring premium hosting fees.
                         </p>
-                        <div class="bg-gray-950 p-4 rounded-lg font-mono text-xs text-purple-300 border border-gray-800">
+                        <div class="bg-gray-950 p-3 md:p-4 rounded-lg font-mono text-[10px] md:text-xs text-purple-300 border border-gray-800 break-words leading-loose">
                             R550 (Base Maintenance Fee) - R100 (Allocated Hosting Cap) - (R120 Domain Cap / 12 Months) = R440 Core Miss Web Management Profit
                         </div>
                         <p>
-                            <strong>Variable Cap Regulations:</strong> If you select/your website is in need of high-demand system paths or specialized domain extensions that exceed our standard limits, the overage is cleanly added to your monthly R550 base billing.
+                            <strong>Variable Cap Regulations:</strong> If you select high-demand system paths or specialized domain extensions that exceed our standard limits, the overage is cleanly added to your monthly R550 base billing.
                         </p>
-                        <ul class="list-none space-y-2 text-sm pl-2">
-                            <li><i class="fas fa-arrow-right text-purple-500 mr-2"></i> <strong>Standard Domain Cap:</strong> Up to R120 / Year</li>
-                            <li><i class="fas fa-arrow-right text-purple-500 mr-2"></i> <strong>Standard Hosting Cap:</strong> Up to R100 / Month</li>
+                        <ul class="list-none space-y-2 text-sm pl-1 md:pl-2">
+                            <li class="flex"><i class="fas fa-arrow-right text-purple-500 mt-1 mr-2 shrink-0"></i> <span><strong>Standard Domain Cap:</strong> Up to R120 / Year</span></li>
+                            <li class="flex"><i class="fas fa-arrow-right text-purple-500 mt-1 mr-2 shrink-0"></i> <span><strong>Standard Hosting Cap:</strong> Up to R100 / Month</span></li>
                         </ul>
-                        <p class="text-sm bg-purple-950/20 border border-purple-500/20 p-4 rounded-lg text-gray-300">
-                            <strong>Practical Example:</strong> If your custom brand strategy demands a premium domain running at R200/year (a R80 annual addition over our cap) and premium resource-heavy cloud hosting priced at R250/month (a R150 monthly addition over our cap), the accumulated variations flow over. Your modified monthly maintenance fee will increase exactly by R230, bringing your complete monthly total to <strong>R780</strong> instead of R550.
-                        </p>
-                        <p class="text-xs text-gray-400">
-                            To find or research these items yourself, you can cross-check premium packages directly via <a href="https://hostafrica.co.za/hosting/web-hosting/" target="_blank" class="text-purple-400 hover:underline">HostAfrica</a> and <a href="https://www.domains.co.za" target="_blank" class="text-purple-400 hover:underline">Domains.co.za</a>.
-                        </p>
                     </div>
 
-                    <ul class="list-disc list-inside space-y-2 ml-2">
-                        <li><strong>Free Tier Option:</strong> Users have the flexibility to pair a custom domain with free hosting, or pair a premium hosting plan with a platform-provided subdomain. Combining a free hosting service with a free domain registration is not supported; such configurations are exclusively reserved for the full Free Tier package.</li>
-                        <li><strong>Maintanance Fee Regarding Free-Tier Option:</strong> Either Option between Domain or Hosting selected as Free-Tier will reduce maintainance fees based on the free option selected.</li>
-                        <li><strong>Content Allocations:</strong> Each month, you receive up to 2 hours of rapid designer revisions (swapping text copy, correcting office numbers, changing team profile pictures, adding features or refining the website). Hours do not roll over.</li>
-                        <li><strong>Asset Ownership Protection:</strong> Despite Miss Web functioning as your technical administrator, you retain 100% legal ownership of your data and intellectual assets. You can transition back to a self-managed framework with 30 days notice.</li>
+                    <ul class="list-disc list-inside space-y-2 ml-1 md:ml-2">
+                        <li><strong>Content Allocations:</strong> Each month, you receive up to 2 hours of rapid designer revisions (swapping text copy, correcting office numbers, changing team profile pictures, adding features). Hours do not roll over.</li>
+                        <li><strong>Asset Ownership Protection:</strong> Despite Miss Web functioning as your technical administrator, you retain 100% legal ownership of your data and intellectual assets.</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Comprehensive Website Inquiry Cost Matrix -->
-            <section id="estimates" class="scroll-mt-10 border-t border-amber-900/30 pt-16">
-                <h2 class="text-3xl font-bold text-amber-400 mb-6"><i class="fas fa-calculator mr-3"></i> Estimated Project Cost Guide</h2>
-                <p class="text-gray-400 mb-6">
+            <section id="estimates" class="scroll-mt-24 md:scroll-mt-10 border-t border-amber-900/30 pt-12 md:pt-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-amber-400 mb-6"><i class="fas fa-calculator mr-3"></i> Estimated Project Cost Guide</h2>
+                <p class="text-gray-400 text-sm md:text-base mb-6">
                     While every asset is carefully scoped to fit your goals, below is a transparent guide detailing typical build architectures, design frameworks, and realistic entry-level price ranges.
                 </p>
 
-                <div class="grid grid-cols-1 gap-6">
-                    <!-- Example 1 -->
-                    <div class="bg-gray-900/40 p-6 rounded-xl border border-gray-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="space-y-1 max-w-xl">
-                            <span class="text-xs uppercase bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded font-bold tracking-wider">Personal / Portfolio</span>
-                            <h4 class="text-lg font-bold text-white">Single-Page Digital CV & Creative Showcase</h4>
-                            <p class="text-sm text-gray-400">
-                                Consists of a sleek, modern landing page, interactive image grid, professional biography summary, integrated downloadable resume links, and an operational AJAX contact form.
-                            </p>
+                <div class="grid grid-cols-1 gap-4 md:gap-6">
+                    <div class="bg-gray-900/40 p-5 md:p-6 rounded-xl border border-gray-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="space-y-2 max-w-xl">
+                            <span class="text-[10px] md:text-xs uppercase bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded font-bold tracking-wider inline-block">Personal / Portfolio</span>
+                            <h4 class="text-base md:text-lg font-bold text-white">Single-Page Digital CV</h4>
+                            <p class="text-xs md:text-sm text-gray-400">Sleek modern landing page, interactive image grid, integrated downloadable resume links, and an operational AJAX contact form.</p>
                         </div>
-                        <div class="text-left md:text-right font-mono whitespace-nowrap">
-                            <div class="text-xs text-gray-500">Estimated Project Cost</div>
-                            <div class="text-xl font-bold text-amber-400">R600 - R1,800</div>
+                        <div class="text-left md:text-right font-mono border-t border-gray-800 md:border-none pt-3 md:pt-0">
+                            <div class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wide">Estimated Cost</div>
+                            <div class="text-lg md:text-xl font-bold text-amber-400">R600 - R1,800</div>
                         </div>
                     </div>
 
-                    <!-- Example 2 -->
-                    <div class="bg-gray-900/40 p-6 rounded-xl border border-gray-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="space-y-1 max-w-xl">
-                            <span class="text-xs uppercase bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-bold tracking-wider">Small Business Startup</span>
-                            <h4 class="text-lg font-bold text-white">Standard Multi-Page Informational Profile </h4>
-                            <p class="text-sm text-gray-400">
-                                Consists of a home page slider, specialized service/product landing areas, an about company profile, a client testimonial section, interactive location maps, full SEO foundations and more.
-                            </p>
+                    <div class="bg-gray-900/40 p-5 md:p-6 rounded-xl border border-gray-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="space-y-2 max-w-xl">
+                            <span class="text-[10px] md:text-xs uppercase bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-bold tracking-wider inline-block">Small Business</span>
+                            <h4 class="text-base md:text-lg font-bold text-white">Multi-Page Informational Profile</h4>
+                            <p class="text-xs md:text-sm text-gray-400">Home page slider, specialized service landing areas, client testimonial section, interactive maps, and full SEO foundations.</p>
                         </div>
-                        <div class="text-left md:text-right font-mono whitespace-nowrap">
-                            <div class="text-xs text-gray-500">Estimated Project Cost</div>
-                            <div class="text-xl font-bold text-amber-400">R1,200 - R3,000</div>
+                        <div class="text-left md:text-right font-mono border-t border-gray-800 md:border-none pt-3 md:pt-0">
+                            <div class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wide">Estimated Cost</div>
+                            <div class="text-lg md:text-xl font-bold text-amber-400">R1,200 - R3,000</div>
                         </div>
                     </div>
 
-                    <!-- Example 3 -->
-                    <div class="bg-gray-900/40 p-6 rounded-xl border border-gray-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="space-y-1 max-w-xl">
-                            <span class="text-xs uppercase bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded font-bold tracking-wider">E-Commerce Boutique</span>
-                            <h4 class="text-lg font-bold text-white">Secure Digital Storefront & Catalog </h4>
-                            <p class="text-sm text-gray-400">
-                                Consists of shopping cart configurations, detailed product filtration controls, automated inventory notifications, secure localized PayFast/Yoco payment gateways, and order management tools.
-                            </p>
+                    <div class="bg-gray-900/40 p-5 md:p-6 rounded-xl border border-gray-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="space-y-2 max-w-xl">
+                            <span class="text-[10px] md:text-xs uppercase bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded font-bold tracking-wider inline-block">E-Commerce</span>
+                            <h4 class="text-base md:text-lg font-bold text-white">Secure Digital Storefront</h4>
+                            <p class="text-xs md:text-sm text-gray-400">Shopping cart configurations, product filtration, secure localized payment gateways, and inventory order management.</p>
                         </div>
-                        <div class="text-left md:text-right font-mono whitespace-nowrap">
-                            <div class="text-xs text-gray-500">Estimated Project Cost</div>
-                            <div class="text-xl font-bold text-amber-400">R800 - R4,600+</div>
-                        </div>
-                    </div>
-
-                    <!-- Example 4 -->
-                    <div class="bg-gray-900/40 p-6 rounded-xl border border-gray-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="space-y-1 max-w-xl">
-                            <span class="text-xs uppercase bg-pink-500/10 text-pink-400 px-2 py-0.5 rounded font-bold tracking-wider">Custom Web Application</span>
-                            <h4 class="text-lg font-bold text-white">Bespoke Portal / Software System</h4>
-                            <p class="text-sm text-gray-400">
-                                Consists of custom database tracking engines, personalized member dashboards, access level security parameters, third-party calculations, and fully customized administrative reporting tools.
-                            </p>
-                        </div>
-                        <div class="text-left md:text-right font-mono whitespace-nowrap">
-                            <div class="text-xs text-gray-500">Estimated Project Cost</div>
-                            <div class="text-xl font-bold text-amber-400">Inquire for Custom Quote</div>
+                        <div class="text-left md:text-right font-mono border-t border-gray-800 md:border-none pt-3 md:pt-0">
+                            <div class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wide">Estimated Cost</div>
+                            <div class="text-lg md:text-xl font-bold text-amber-400">R800 - R4,600+</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Add-ons & Exclusions -->
-            <section id="addons" class="scroll-mt-10 border-t border-orange-900/30 pt-16">
-                <h2 class="text-3xl font-bold text-orange-400 mb-6"><i class="fas fa-plus-circle mr-3"></i> Add-Ons & Out of Scope</h2>
-                <div class="space-y-4 text-gray-400 leading-relaxed">
+            <section id="addons" class="scroll-mt-24 md:scroll-mt-10 border-t border-orange-900/30 pt-12 md:pt-16">
+                <h2 class="text-2xl md:text-3xl font-bold text-orange-400 mb-6"><i class="fas fa-plus-circle mr-3"></i> Add-Ons & Out of Scope</h2>
+                <div class="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed">
                     <p>The following services are considered external to standard package scopes and will require a custom quote:</p>
                     
-                    <p class="bg-gray-900/80 p-4 rounded-xl text-sm border-l-4 border-orange-500 text-gray-300">
-                        <strong>Mandatory API Cost Clause:</strong> In any of these tier packages, if your unique platform features third-party <a href="https://developer.mozilla.org/en-US/docs/Glossary/API" target="_blank" class="text-orange-400 hover:underline font-semibold">API Connections <i class="fas fa-external-link-alt text-[10px] ml-0.5"></i></a> that require recurring financial payments to operate (such as high-volume maps, SMS notification gateways, or global weather systems), you will be directly notified. The premium billing will be added straight into your monthly Miss Web Managed Maintenance fee, or billed directly to you under a Self-Managed account.
+                    <p class="bg-gray-900/80 p-4 md:p-5 rounded-xl text-xs md:text-sm border-l-4 border-orange-500 text-gray-300 shadow-lg">
+                        <strong>Mandatory API Cost Clause:</strong> If your unique platform features third-party APIs that require recurring financial payments to operate (such as high-volume maps, SMS notification gateways, or global weather systems), the premium billing will be added straight into your monthly Miss Web Managed Maintenance fee, or billed directly to you under a Self-Managed account.
                     </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                        <div class="bg-gray-800/50 p-5 rounded-lg border border-gray-700/50">
-                            <h4 class="text-white font-medium mb-2">Content Creation</h4>
-                            <p class="text-sm">Copywriting, professional logo design, and sourcing premium stock assets are not included unless they are free to use.</p>
+                        <div class="bg-gray-800/50 p-4 md:p-5 rounded-lg border border-gray-700/50">
+                            <h4 class="text-white font-medium mb-1 md:mb-2 text-sm md:text-base">Content Creation</h4>
+                            <p class="text-xs md:text-sm">Copywriting, professional logo design, and sourcing premium stock assets are not included unless they are free to use.</p>
                         </div>
-                        <div class="bg-gray-800/50 p-5 rounded-lg border border-gray-700/50">
-                            <h4 class="text-white font-medium mb-2">Advanced Integrations</h4>
-                            <p class="text-sm">Paid third-party database nodes or specialized business automation tools.</p>
-                        </div>
-                        <div class="bg-gray-800/50 p-5 rounded-lg border border-gray-700/50">
-                            <h4 class="text-white font-medium mb-2">Additional Revisions</h4>
-                            <p class="text-sm">Design revisions beyond the agreed-upon package limit will be billed at an hourly rate.</p>
+                        <div class="bg-gray-800/50 p-4 md:p-5 rounded-lg border border-gray-700/50">
+                            <h4 class="text-white font-medium mb-1 md:mb-2 text-sm md:text-base">Advanced Integrations</h4>
+                            <p class="text-xs md:text-sm">Paid third-party database nodes or specialized business automation tools.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Call to Action -->
-            <div class="pt-16 pb-8 text-center border-t border-gray-800 mt-16">
-                <h3 class="text-2xl font-bold text-white mb-6">Ready to build?</h3>
-                <a href="/#contact" class="inline-block bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-gray-200 transition-transform duration-300 hover:scale-105 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+            <div class="pt-12 md:pt-16 pb-8 text-center border-t border-gray-800 mt-12 md:mt-16">
+                <h3 class="text-xl md:text-2xl font-bold text-white mb-6">Ready to build?</h3>
+                <a href="/#contact" class="inline-block bg-white text-black px-8 md:px-10 py-3.5 md:py-4 rounded-full font-bold hover:bg-gray-200 transition-transform duration-300 hover:scale-105 shadow-[0_0_15px_rgba(255,255,255,0.2)] text-sm md:text-base w-full sm:w-auto">
                     Initiate Your Project
                 </a>
             </div>
@@ -298,5 +277,56 @@
         </main>
     </div>
 
+    <!-- Active Indicator Bar Scroll-Spy Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+            // Unique category classes mapping the table underlines to the viewport track positions
+            const barStyles = {
+                'overview': ['text-white', 'border-gray-400', 'bg-white/5'],
+                'free-tier': ['text-emerald-400', 'border-emerald-500', 'bg-emerald-500/5'],
+                'self-managed': ['text-blue-400', 'border-blue-500', 'bg-blue-500/5'],
+                'managed': ['text-purple-400', 'border-purple-500', 'bg-purple-500/5'],
+                'estimates': ['text-amber-400', 'border-amber-500', 'bg-amber-500/5'],
+                'addons': ['text-orange-400', 'border-orange-500', 'bg-orange-500/5']
+            };
+
+            const options = {
+                root: null,
+                rootMargin: '-25% 0px -55% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.getAttribute('id');
+                        
+                        navLinks.forEach(link => {
+                            const targetId = link.getAttribute('href').slice(1);
+                            
+                            if (targetId === activeId) {
+                                if (barStyles[activeId]) {
+                                    link.classList.add(...barStyles[activeId]);
+                                    link.classList.remove('text-gray-400', 'border-transparent');
+                                }
+                                // Center scroll nav smoothly onto active underline bar
+                                link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                            } else {
+                                if (barStyles[targetId]) {
+                                    link.classList.remove(...barStyles[targetId]);
+                                    link.classList.add('text-gray-400', 'border-transparent');
+                                }
+                            }
+                        });
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
 </body>
 </html>

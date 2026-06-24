@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="Miss Web | You Envision, We Build">
+
+    <link rel="icon" type="image/png" href="static\images\favicon.png">
+
     <meta property="og:description" content="High-performance, beautifully tailored digital spaces built to scale your vision.">
     <meta property="og:image" content="https://res.cloudinary.com/dcfa8oisr/image/upload/v1757070575/WhatsApp_Image_2025-09-05_at_12_enhanced_i3fos2.png">
     <title>Miss Web - You Envision, We Build</title>
@@ -39,6 +42,21 @@
             opacity: 0;
         }
 
+        @keyframes construct {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.construct-anim {
+    display: inline-block;
+    animation: construct 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
         /* Animations */
         @keyframes glow {
             0%, 100% { text-shadow: 0 0 6px rgba(85, 172, 238, 0.25), 0 0 12px rgba(85, 172, 238, 0.1); }
@@ -46,8 +64,15 @@
         }
         .animate-glow { animation: glow 3s ease-in-out infinite; }
 
-        /* Carousel Base */
-        .carousel-container { position: relative; padding: 20px 0; }
+        /* Carousel Base Refined */
+        .carousel-container { 
+            position: relative; 
+            padding: 0 10px; 
+        }
+        .carousel-viewport {
+            overflow: hidden; /* Clears horizontal movement cleanly */
+            padding: 24px 0;  /* Prevents top & bottom card box-shadows from cutting off */
+        }
         .carousel-track { display: flex; transition: transform 0.5s ease-in-out; cursor: grab; }
         .carousel-track:active { cursor: grabbing; }
         .carousel-item { flex: 0 0 100%; padding: 0 15px; box-sizing: border-box; }
@@ -70,22 +95,49 @@
             .desktop-grid .carousel-track { grid-template-columns: repeat(4, 1fr); }
         }
 
+        @keyframes assemble {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) rotate(-10deg) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+}
+.assemble-anim {
+    display: inline-block;
+    animation: assemble 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
         .carousel-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
             background: rgba(85, 172, 238, 0.7); border: none; color: white;
-            font-size: 24px; width: 40px; height: 40px; border-radius: 50%;
+            font-size: 20px; width: 36px; height: 36px; border-radius: 50%;
             cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;
             transition: all 0.3s ease;
         }
-        .carousel-btn:hover { background: rgba(85, 172, 238, 1); }
-        .carousel-btn.prev { left: 10px; }
-        .carousel-btn.next { right: 10px; }
-        .carousel-dots { display: flex; justify-content: center; margin-top: 20px; }
-        .dot {
-            width: 10px; height: 10px; border-radius: 50%;
-            background: #4a5568; margin: 0 5px; cursor: pointer; transition: background 0.3s ease;
+        @media (min-width: 768px) {
+            .carousel-btn { font-size: 24px; width: 40px; height: 40px; }
         }
+        .carousel-btn:hover { background: rgba(85, 172, 238, 1); }
+        .carousel-btn.prev { left: -5px; }
+        @media (min-width: 768px) { .carousel-btn.prev { left: 5px; } }
+        .carousel-btn.next { right: -5px; }
+        @media (min-width: 768px) { .carousel-btn.next { right: 5px; } }
+        
+        .carousel-dots { display: flex; justify-content: center; margin-top: 10px; }
+        .dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #4a5568; margin: 0 4px; cursor: pointer; transition: background 0.3s ease;
+        }
+        @media (min-width: 768px) { .dot { width: 10px; height: 10px; margin: 0 5px; } }
         .dot.active { background: #55acee; }
+
+        .fade-right {
+        mask-image: linear-gradient(to right, black 90%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+        }
 
         /* Premium Buttons */
         .subscription-btn {
@@ -116,18 +168,18 @@
 </head>
 <body class="leading-relaxed">
 
-<div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-3 pointer-events-none max-w-sm w-full"></div>
+<div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-3 pointer-events-none max-w-sm w-full px-4 md:px-0"></div>
 
 <div id="public-site">
     <div id="star-modal" class="modal fixed inset-0 z-50 items-center justify-center p-4">
         <div class="absolute inset-0 bg-gray-900 bg-opacity-90 backdrop-blur-sm"></div>
-        <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl relative max-w-lg w-full border border-gray-700">
-            <button onclick="closeModal('star-modal')" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors duration-300 z-10"><i class="fas fa-times text-xl"></i></button>
-            <h3 class="text-2xl font-bold mb-4 text-custom-light-blue">Domain Name & Hosting Platform</h3>
-            <div class="mb-6 space-y-4">
+        <div class="bg-gray-800 p-6 md:p-8 rounded-2xl shadow-2xl relative max-w-lg w-full border border-gray-700">
+            <button onclick="closeModal('star-modal')" class="absolute top-4 right-4 md:top-6 md:right-6 text-gray-400 hover:text-white transition-colors duration-300 z-10"><i class="fas fa-times text-xl"></i></button>
+            <h3 class="text-xl md:text-2xl font-bold mb-4 text-custom-light-blue">Domain Name & Hosting</h3>
+            <div class="mb-6 space-y-4 text-sm md:text-base">
                 <p class="text-gray-300 bg-gray-900/50 p-4 rounded-lg border-l-4 border-custom-blue">
                     <span class="font-bold text-custom-gold block mb-1">Domain Name:</span> 
-                    Think of it as your website's street address. Just like your home needs a unique address so people can find you, your website needs a domain name. Example: <span class="text-custom-light-blue font-mono">www.yourbusiness.com</span>
+                    Think of it as your website's street address. Just like your home needs a unique address so people can find you, your website needs a domain name. Example: <span class="text-custom-light-blue font-mono text-xs md:text-sm">www.yourbusiness.com</span>
                 </p>
                 <p class="text-gray-300 bg-gray-900/50 p-4 rounded-lg border-l-4 border-purple-500">
                     <span class="font-bold text-custom-gold block mb-1">Hosting Platform:</span> 
@@ -135,24 +187,24 @@
                 </p>
             </div>
             <div class="text-center">
-                <button class="bg-custom-blue text-white px-8 py-2.5 rounded-full font-bold hover:bg-opacity-90 transition shadow-lg" onclick="closeModal('star-modal')">Got it!</button>
+                <button class="bg-custom-blue text-white px-8 py-2.5 rounded-full font-bold hover:bg-opacity-90 transition shadow-lg w-full sm:w-auto" onclick="closeModal('star-modal')">Got it!</button>
             </div>
         </div>
     </div>
 
     <div id="review-modal" class="modal fixed inset-0 z-50 items-center justify-center p-4">
         <div class="absolute inset-0 bg-gray-900 bg-opacity-90 backdrop-blur-sm"></div>
-        <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl relative max-w-lg w-full border border-gray-700">
-            <button onclick="closeModal('review-modal')" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors duration-300 z-10"><i class="fas fa-times text-xl"></i></button>
-            <h3 class="text-2xl font-bold mb-4 text-custom-light-blue">Write a Review</h3>
-            <div id="review-message" class="mb-4 hidden text-center rounded-lg p-3 text-white font-semibold"></div>
+        <div class="bg-gray-800 p-6 md:p-8 rounded-2xl shadow-2xl relative max-w-lg w-full border border-gray-700">
+            <button onclick="closeModal('review-modal')" class="absolute top-4 right-4 md:top-6 md:right-6 text-gray-400 hover:text-white transition-colors duration-300 z-10"><i class="fas fa-times text-xl"></i></button>
+            <h3 class="text-xl md:text-2xl font-bold mb-4 text-custom-light-blue">Write a Review</h3>
+            <div id="review-message" class="mb-4 hidden text-center rounded-lg p-3 text-white font-semibold text-sm"></div>
             <form id="review-form" class="space-y-4">
                 <div class="relative">
-                    <input type="text" id="review-name" name="name" class="peer w-full bg-gray-900 border border-gray-700 rounded-lg p-4 pt-6 focus:outline-none focus:ring-2 focus:ring-custom-blue text-white placeholder-transparent" placeholder="Name" required>
-                    <label for="review-name" class="peer-label absolute left-4 top-4 text-gray-400 text-base transition-all cursor-text pointer-events-none">Your Name *</label>
+                    <input type="text" id="review-name" name="name" class="peer w-full bg-gray-900 border border-gray-700 rounded-lg p-4 pt-6 focus:outline-none focus:ring-2 focus:ring-custom-blue text-white text-base placeholder-transparent" placeholder="Name" required>
+                    <label for="review-name" class="peer-label absolute left-4 top-4 text-gray-400 text-sm md:text-base transition-all cursor-text pointer-events-none">Your Name *</label>
                 </div>
                 <div>
-                    <select id="review-rating" name="rating" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-gray-300 focus:outline-none focus:ring-2 focus:ring-custom-blue" required>
+                    <select id="review-rating" name="rating" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-gray-300 text-base focus:outline-none focus:ring-2 focus:ring-custom-blue" required>
                         <option value="" disabled selected>Select Rating *</option>
                         <option value="5">★★★★★ (5/5) - Excellent</option>
                         <option value="4">★★★★☆ (4/5) - Very Good</option>
@@ -162,12 +214,12 @@
                     </select>
                 </div>
                 <div class="relative">
-                    <input type="url" id="review-website" name="website" class="peer w-full bg-gray-900 border border-gray-700 rounded-lg p-4 pt-6 focus:outline-none focus:ring-2 focus:ring-custom-blue text-white placeholder-transparent" placeholder="URL">
-                    <label for="review-website" class="peer-label absolute left-4 top-4 text-gray-400 text-base transition-all cursor-text pointer-events-none">Your Website URL (Optional)</label>
+                    <input type="url" id="review-website" name="website" class="peer w-full bg-gray-900 border border-gray-700 rounded-lg p-4 pt-6 focus:outline-none focus:ring-2 focus:ring-custom-blue text-white text-base placeholder-transparent" placeholder="URL">
+                    <label for="review-website" class="peer-label absolute left-4 top-4 text-gray-400 text-sm md:text-base transition-all cursor-text pointer-events-none">Your Website URL (Optional)</label>
                 </div>
                 <div class="relative">
-                    <textarea id="review-text" name="review" rows="4" class="peer w-full bg-gray-900 border border-gray-700 rounded-lg p-4 pt-6 focus:outline-none focus:ring-2 focus:ring-custom-blue text-white placeholder-transparent" placeholder="Review" required></textarea>
-                    <label for="review-text" class="peer-label absolute left-4 top-4 text-gray-400 text-base transition-all cursor-text pointer-events-none">Your Experience *</label>
+                    <textarea id="review-text" name="review" rows="4" class="peer w-full bg-gray-900 border border-gray-700 rounded-lg p-4 pt-6 focus:outline-none focus:ring-2 focus:ring-custom-blue text-white text-base placeholder-transparent" placeholder="Review" required></textarea>
+                    <label for="review-text" class="peer-label absolute left-4 top-4 text-gray-400 text-sm md:text-base transition-all cursor-text pointer-events-none">Your Experience *</label>
                 </div>
                 <div class="text-center pt-2">
                     <button type="submit" class="bg-custom-blue text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition-colors duration-300 w-full sm:w-auto">Submit Review</button>
@@ -177,12 +229,17 @@
     </div>
 
     <header class="bg-gray-900/95 backdrop-blur-md py-4 px-4 md:px-8 lg:px-16 shadow-lg sticky top-0 z-40 border-b border-gray-800">
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
-            <div class="flex items-center space-x-3 mb-4 md:mb-0">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
                 <img src="https://res.cloudinary.com/dcfa8oisr/image/upload/v1757070575/WhatsApp_Image_2025-09-05_at_12_enhanced_i3fos2.png" alt="Miss Web Gold Logo" class="h-10 w-auto rounded-full ring-2 ring-custom-gold/30">
                 <div class="text-xl font-bold tracking-wide">Miss Web</div>
             </div>
-            <nav class="flex flex-wrap justify-center md:justify-end text-sm lg:text-base space-x-4 md:space-x-8 relative items-center font-medium">
+            
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none text-2xl transition-colors">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="hidden md:flex flex-wrap justify-end text-sm lg:text-base space-x-4 md:space-x-8 relative items-center font-medium">
                 <a href="#services" class="nav-link relative hover:text-custom-light-blue transition-colors duration-300 text-gray-400">Services</a>
                 <a href="#pricing" class="nav-link relative hover:text-custom-light-blue transition-colors duration-300 text-gray-400">Pricing</a>
                  <a href="#faq" class="nav-link relative hover:text-custom-light-blue transition-colors duration-300 text-gray-400">FAQ</a>
@@ -192,22 +249,42 @@
                 <div id="nav-line" class="nav-line"></div>
             </nav>
         </div>
+
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-gray-900 border-b border-gray-800 flex-col items-center py-6 space-y-6 shadow-2xl">
+            <a href="#services" class="mobile-link text-gray-400 hover:text-custom-light-blue text-lg font-medium">Services</a>
+            <a href="#pricing" class="mobile-link text-gray-400 hover:text-custom-light-blue text-lg font-medium">Pricing</a>
+            <a href="#faq" class="mobile-link text-gray-400 hover:text-custom-light-blue text-lg font-medium">FAQ</a>
+            <a href="#reviews" class="mobile-link text-gray-400 hover:text-custom-light-blue text-lg font-medium">Reviews</a>
+            <a href="#contact" class="mobile-link text-gray-400 hover:text-custom-light-blue text-lg font-medium">Contact</a>
+            <button class="subscription-btn sub-trigger mt-2 px-6 py-2"><i class="fas fa-crown mr-2"></i> Subscription Hub</button>
+        </div>
     </header>
 
     <main class="container mx-auto px-4 md:px-8 lg:px-16 py-8">
-        <div class="flex justify-end mb-4">
-            <button class="subscription-btn sub-trigger"><i class="fas fa-crown"></i> My Subscription</button>
+        <div class="hidden md:flex justify-end mb-4">
+            <button class="subscription-btn sub-trigger"><i class="fas fa-crown mr-2"></i> My Subscription</button>
         </div>
 
-        <section id="slogan" class="text-center py-16 md:py-24 relative">
+        <section id="slogan" class="text-center py-12 md:py-24 relative">
             <div class="absolute inset-0 flex justify-center items-center pointer-events-none -z-10 opacity-30">
-                <div class="w-72 h-72 bg-custom-blue rounded-full mix-blend-screen filter blur-[100px] animate-pulse"></div>
-                <div class="w-72 h-72 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] animate-pulse" style="animation-delay: 1s;"></div>
+                <div class="w-48 h-48 md:w-72 md:h-72 bg-custom-blue rounded-full mix-blend-screen filter blur-[80px] md:blur-[100px] animate-pulse"></div>
+                <div class="w-48 h-48 md:w-72 md:h-72 bg-purple-600 rounded-full mix-blend-screen filter blur-[80px] md:blur-[100px] animate-pulse" style="animation-delay: 1s;"></div>
             </div>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6 animate-glow text-white">
-                YOU ENVISION. <span class="text-transparent bg-clip-text bg-gradient-to-r from-custom-blue to-purple-400">WE BUILD.</span>
-            </h1>
-            <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto font-light mb-10">
+           <h1 class="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6 text-white p-6 -m-6 relative z-10">
+    <span class="animate-glow">YOU ENVISION.</span> 
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-custom-blue to-purple-400 block sm:inline [-webkit-text-stroke:1px_#FFD700] [filter:drop-shadow(0_0_8px_rgba(255,215,0,0.4))]">
+        <span class="assemble-anim" style="animation-delay: 0.1s;">W</span>
+        <span class="assemble-anim" style="animation-delay: 0.2s;">E</span>
+        <span class="assemble-anim" style="animation-delay: 0.3s;"> </span>
+        <span class="assemble-anim" style="animation-delay: 0.4s;">B</span>
+        <span class="assemble-anim" style="animation-delay: 0.5s;">U</span>
+        <span class="assemble-anim" style="animation-delay: 0.6s;">I</span>
+        <span class="assemble-anim" style="animation-delay: 0.7s;">L</span>
+        <span class="assemble-anim" style="animation-delay: 0.8s;">D</span>
+        <span class="assemble-anim" style="animation-delay: 0.9s;">.</span>
+    </span>
+</h1>
+            <p class="text-base sm:text-xl text-gray-400 max-w-2xl mx-auto font-light mb-10 px-2">
                 High-performance, beautifully tailored digital spaces built to scale your vision ~ without the corporate price tag.
             </p>
             <a href="#contact" class="inline-block bg-white text-gray-900 font-bold py-3.5 px-8 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 transition-transform duration-300">
@@ -215,112 +292,112 @@
             </a>
         </section>
 
-        <section id="services" class="py-16">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">What We Build For You</h2>
-                <div class="w-20 h-1 bg-custom-blue mx-auto rounded-full"></div>
+        <section id="services" class="py-12 md:py-16">
+            <div class="text-center mb-10 md:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">What We Build For You</h2>
+                <div class="w-16 md:w-20 h-1 bg-custom-blue mx-auto rounded-full"></div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-8 rounded-2xl text-center hover:border-blue-500/50 hover:bg-gray-800 transition-all duration-300 group">
-                    <div class="w-16 h-16 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform">
-                        <i class="fas fa-user text-3xl text-blue-400"></i>
+                <div class="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-6 md:p-8 rounded-2xl text-center hover:border-blue-500/50 hover:bg-gray-800 transition-all duration-300 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:-translate-y-2 transition-transform">
+                        <i class="fas fa-user text-2xl md:text-3xl text-blue-400"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Personal Sites</h3>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white">Personal Sites</h3>
                     <p class="text-gray-400 text-sm">Showcase your brand, portfolio, or blog with a stunning custom site.</p>
                 </div>
-                <div class="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-8 rounded-2xl text-center hover:border-emerald-500/50 hover:bg-gray-800 transition-all duration-300 group">
-                    <div class="w-16 h-16 mx-auto bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform">
-                        <i class="fas fa-briefcase text-3xl text-emerald-400"></i>
+                <div class="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-6 md:p-8 rounded-2xl text-center hover:border-emerald-500/50 hover:bg-gray-800 transition-all duration-300 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 mx-auto bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:-translate-y-2 transition-transform">
+                        <i class="fas fa-briefcase text-2xl md:text-3xl text-emerald-400"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Business Sites</h3>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white">Business Sites</h3>
                     <p class="text-gray-400 text-sm">Establish a professional online presence tailored to your company.</p>
                 </div>
-                <div class="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-8 rounded-2xl text-center hover:border-amber-500/50 hover:bg-gray-800 transition-all duration-300 group">
-                    <div class="w-16 h-16 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform">
-                        <i class="fas fa-shopping-cart text-3xl text-amber-400"></i>
+                <div class="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-6 md:p-8 rounded-2xl text-center hover:border-amber-500/50 hover:bg-gray-800 transition-all duration-300 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 mx-auto bg-amber-500/10 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:-translate-y-2 transition-transform">
+                        <i class="fas fa-shopping-cart text-2xl md:text-3xl text-amber-400"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">E-commerce</h3>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white">E-commerce</h3>
                     <p class="text-gray-400 text-sm">Sell products online with a secure, high-converting digital storefront.</p>
                 </div>
-                <div class="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-8 rounded-2xl text-center hover:border-purple-500/50 hover:bg-gray-800 transition-all duration-300 group">
-                    <div class="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform">
-                        <i class="fas fa-code-branch text-3xl text-purple-400"></i>
+                <div class="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-6 md:p-8 rounded-2xl text-center hover:border-purple-500/50 hover:bg-gray-800 transition-all duration-300 group">
+                    <div class="w-14 h-14 md:w-16 md:h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:-translate-y-2 transition-transform">
+                        <i class="fas fa-code-branch text-2xl md:text-3xl text-purple-400"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Web Apps</h3>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white">Web Apps</h3>
                     <p class="text-gray-400 text-sm">Build a unique web application from scratch to fit complex logic needs.</p>
                 </div>
             </div>
         </section>
 
-        <section id="pricing" class="py-16">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Transparent Pricing</h2>
+        <section id="pricing" class="py-12 md:py-16">
+            <div class="text-center mb-10 md:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Transparent Pricing</h2>
                 <button onclick="openModal('star-modal')" class="text-sm font-semibold text-custom-light-blue hover:text-white transition-colors flex items-center justify-center mx-auto space-x-2">
                     <i class="fas fa-question-circle"></i> <span>What is a Domain / Hosting?</span>
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                <div class="bg-gray-800/80 p-8 rounded-2xl shadow-xl border border-gray-700 flex flex-col h-full relative overflow-hidden">
-                    <div class="text-center mb-8 relative z-10">
-                        <h3 class="text-2xl font-bold mb-2">Free-tier Deploy</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
+               <div class="bg-gray-800/80 p-6 md:p-8 rounded-2xl shadow-xl border border-gray-700 flex flex-col h-full relative">
+                    <div class="text-center mb-6 md:mb-8 relative z-10">
+                        <h3 class="text-xl md:text-2xl font-bold mb-2">Free-tier Deploy</h3>
                         <p class="text-gray-400 text-sm">Pay only for App Development.</p>
                     </div>
                     <div class="flex-grow space-y-4 text-sm md:text-base relative z-10">
-                        <div class="flex items-start space-x-3"><i class="fas fa-check text-green-400 mt-1"></i> <p><span class="font-semibold text-white">Domain:</span> Free subdomain</p></div>
-                        <div class="flex items-start space-x-3"><i class="fas fa-check text-green-400 mt-1"></i> <p><span class="font-semibold text-white">Hosting:</span> Free hosting tier</p></div>
-                        <div class="flex items-start space-x-3"><i class="fas fa-check text-green-400 mt-1"></i> <p><span class="font-semibold text-white">Development:</span> Inquire for Quote</p></div>
+                        <div class="flex items-start space-x-3"><i class="fas fa-check text-green-400 mt-1 shrink-0"></i> <p><span class="font-semibold text-white">Domain:</span> Free subdomain</p></div>
+                        <div class="flex items-start space-x-3"><i class="fas fa-check text-green-400 mt-1 shrink-0"></i> <p><span class="font-semibold text-white">Hosting:</span> Free hosting tier</p></div>
+                        <div class="flex items-start space-x-3"><i class="fas fa-check text-green-400 mt-1 shrink-0"></i> <p><span class="font-semibold text-white">Development:</span> Inquire for Quote</p></div>
                         <div class="mt-6 p-4 rounded-xl bg-gray-900/50 border border-gray-700 text-gray-400 text-xs">
                             <span class="text-red-400 font-bold block mb-1">Limitations:</span>
                             Lower storage, slower speeds, and non-custom domain name.
                         </div>
                     </div>
-                    <button class="inquire-btn mt-8 w-full bg-gray-700 text-white font-bold py-3 rounded-xl hover:bg-gray-600 transition z-10" data-package="free-tier">Select Package</button>
+                    <button class="inquire-btn mt-6 md:mt-8 w-full bg-gray-700 text-white font-bold py-3 rounded-xl hover:bg-gray-600 transition z-10" data-package="free-tier">Select Package</button>
                 </div>
 
-                <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border-2 border-custom-blue flex flex-col h-full relative transform md:-translate-y-4">
+                <div class="bg-gray-800 p-6 md:p-8 rounded-2xl shadow-2xl border-2 border-custom-blue flex flex-col h-full relative transform md:-translate-y-4 mt-4 md:mt-0">
                     <span class="absolute top-0 right-0 bg-custom-blue text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-xl">Most Popular</span>
-                    <div class="text-center mb-8">
-                        <h3 class="text-2xl font-bold mb-2 text-white">Self-Managed</h3>
+                    <div class="text-center mb-6 md:mb-8">
+                        <h3 class="text-xl md:text-2xl font-bold mb-2 text-white">Self-Managed</h3>
                         <p class="text-custom-light-blue text-sm">You handle renewals, we build.</p>
                     </div>
                     <div class="flex-grow space-y-4 text-sm md:text-base">
                         <div class="flex items-start space-x-3">
-                            <i class="fas fa-check text-custom-blue mt-1"></i> 
+                            <i class="fas fa-check text-custom-blue mt-1 shrink-0"></i> 
                             <p><span class="font-semibold text-white">Domain:</span> <span class="text-gray-300">Opt for free Domain Name, or +-R120/yearly for Custom Domain Name.</span></p>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <i class="fas fa-check text-custom-blue mt-1"></i> 
-                            <p><span class="font-semibold text-white">Hosting:</span> <span class="text-gray-300">Opt for free, or +-R100/monthly for Premium Hosting.</span></p>
+                            <i class="fas fa-check text-custom-blue mt-1 shrink-0"></i> 
+                            <p><span class="font-semibold text-white">Hosting:</span> <span class="text-gray-300">Opt for free, or or +-R100/monthly for Premium Hosting.</span></p>
                         </div>
-                        <div class="flex items-start space-x-3"><i class="fas fa-check text-custom-blue mt-1"></i> <p><span class="font-semibold text-white">Development:</span> Inquire for Quote</p></div>
+                        <div class="flex items-start space-x-3"><i class="fas fa-check text-custom-blue mt-1 shrink-0"></i> <p><span class="font-semibold text-white">Development:</span> Inquire for Quote</p></div>
                        <div class="mt-6 p-4 rounded-xl bg-gray-900/50 border border-gray-700 text-gray-400 text-xs">
                             <span class="text-red-400 font-bold block mb-1">Overhead:</span>
                            You manage and pay for the monthly hosting and yearly domain fees for your website.
                         </div>
                     </div>
-                    <button class="inquire-btn mt-8 w-full bg-custom-blue text-white font-bold py-3 rounded-xl hover:bg-opacity-90 shadow-[0_0_15px_rgba(85,172,238,0.4)] transition" data-package="self-managed">Select Package</button>
+                    <button class="inquire-btn mt-6 md:mt-8 w-full bg-custom-blue text-white font-bold py-3 rounded-xl hover:bg-opacity-90 shadow-[0_0_15px_rgba(85,172,238,0.4)] transition" data-package="self-managed">Select Package</button>
                 </div>
 
-                <div class="bg-gray-800/80 p-8 rounded-2xl shadow-xl border border-gray-700 flex flex-col h-full">
-                    <div class="text-center mb-8">
-                        <h3 class="text-2xl font-bold mb-2 text-white">Miss Web Managed</h3>
-                        <p class="text-gray-400 text-xs font-semibold text-purple-400 px-2 leading-relaxed">Subscription Hub - We handle the renewals & build. You focus on your business</p>
+                <div class="bg-gray-800/80 p-6 md:p-8 rounded-2xl shadow-xl border border-gray-700 flex flex-col h-full mt-4 md:mt-0">
+                    <div class="text-center mb-6 md:mb-8">
+                        <h3 class="text-xl md:text-2xl font-bold mb-2 text-white">Miss Web Managed</h3>
+                        <p class="text-gray-400 text-xs font-semibold text-purple-400 px-2 leading-relaxed">Subscription Hub - We handle renewals & build. You focus on your business.</p>
                     </div>
                     <div class="flex-grow space-y-4 text-sm md:text-base">
                         <div class="flex items-start space-x-3">
-                            <i class="fas fa-check text-purple-400 mt-1"></i> 
+                            <i class="fas fa-check text-purple-400 mt-1 shrink-0"></i> 
                             <p><span class="font-semibold text-white">Domain:</span> <span class="text-gray-300">Opt for free Domain Name, or for Custom Domain Name.</span></p>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <i class="fas fa-check text-purple-400 mt-1"></i> 
+                            <i class="fas fa-check text-purple-400 mt-1 shrink-0"></i> 
                             <p><span class="font-semibold text-white">Hosting:</span> <span class="text-gray-300">Opt for free, or for Premium Hosting.</span></p>
                         </div>
-                        <div class="flex items-start space-x-3"><i class="fas fa-check text-purple-400 mt-1"></i> <p><span class="font-semibold text-white">Maintenance Fee:</span> +R550/mo (Domain & Hosting fees included here)</p></div>
-                        <div class="flex items-start space-x-3"><i class="fas fa-check text-purple-400 mt-1"></i> <p><span class="font-semibold text-white">Perks:</span> We pay registrar/host on your behalf, ensure tech is updated, full ownership transfer ready.</p></div>
-                        <div class="flex items-start space-x-3"><i class="fas fa-check text-purple-400 mt-1"></i> <p><span class="font-semibold text-white">Development:</span> Inquire for Quote</p></div>
+                        <div class="flex items-start space-x-3"><i class="fas fa-check text-purple-400 mt-1 shrink-0"></i> <p><span class="font-semibold text-white">Maintenance Fee:</span> +R550/mo (Domain & Hosting fees included here)</p></div>
+                        <div class="flex items-start space-x-3"><i class="fas fa-check text-purple-400 mt-1 shrink-0"></i> <p><span class="font-semibold text-white">Perks:</span> We pay registrar/host on your behalf, ensure tech is updated, full ownership transfer ready.</p></div>
+                        <div class="flex items-start space-x-3"><i class="fas fa-check text-purple-400 mt-1 shrink-0"></i> <p><span class="font-semibold text-white">Development:</span> Inquire for Quote</p></div>
                     </div>
-                    <button class="inquire-btn mt-8 w-full bg-gray-700 text-white font-bold py-3 rounded-xl hover:bg-gray-600 transition" data-package="managed">Select Package</button>
+                    <button class="inquire-btn mt-6 md:mt-8 w-full bg-gray-700 text-white font-bold py-3 rounded-xl hover:bg-gray-600 transition" data-package="managed">Select Package</button>
                 </div>
             </div>
             <div class="mt-8 text-center">
@@ -330,10 +407,10 @@
             </div>
         </section>
 
-        <section id="process" class="py-16">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">How We Work</h2>
-                <div class="w-20 h-1 bg-custom-blue mx-auto rounded-full mb-6"></div>
+        <section id="process" class="py-12 md:py-16">
+            <div class="text-center mb-10 md:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">How We Work</h2>
+                <div class="w-16 md:w-20 h-1 bg-custom-blue mx-auto rounded-full mb-6"></div>
                 <a href="Process.html" target="_blank" class="inline-flex items-center text-sm text-gray-400 hover:text-custom-light-blue transition-colors">
                     <i class="fas fa-sitemap mr-2"></i> Read Full Process Documentation
                 </a>
@@ -342,127 +419,124 @@
                 <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-700 -z-10 transform -translate-y-[40px]"></div>
                 
                 <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl text-center relative z-10 hover:border-custom-blue transition-colors duration-300">
-                    <div class="w-12 h-12 mx-auto bg-gray-900 border-2 border-custom-blue rounded-full flex items-center justify-center font-bold text-white mb-4 shadow-[0_0_15px_rgba(85,172,238,0.4)]">1</div>
+                    <div class="w-12 h-12 shrink-0 mx-auto bg-gray-900 border-2 border-custom-blue rounded-full flex items-center justify-center font-bold text-white mb-4 shadow-[0_0_15px_rgba(85,172,238,0.4)]">1</div>
                     <h3 class="text-lg font-bold text-white mb-2">Discovery</h3>
                     <p class="text-gray-400 text-sm">We align on your vision, goals, and map out the exact technical requirements.</p>
                 </div>
                 
                 <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl text-center relative z-10 hover:border-purple-400 transition-colors duration-300">
-                    <div class="w-12 h-12 mx-auto bg-gray-900 border-2 border-purple-400 rounded-full flex items-center justify-center font-bold text-white mb-4 shadow-[0_0_15px_rgba(168,85,247,0.4)]">2</div>
+                    <div class="w-12 h-12 shrink-0 mx-auto bg-gray-900 border-2 border-purple-400 rounded-full flex items-center justify-center font-bold text-white mb-4 shadow-[0_0_15px_rgba(168,85,247,0.4)]">2</div>
                     <h3 class="text-lg font-bold text-white mb-2">Prototype</h3>
                     <p class="text-gray-400 text-sm">Visualizing the structure, user flow, and design before writing code.</p>
                 </div>
                 
                 <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl text-center relative z-10 hover:border-emerald-400 transition-colors duration-300">
-                    <div class="w-12 h-12 mx-auto bg-gray-900 border-2 border-emerald-400 rounded-full flex items-center justify-center font-bold text-white mb-4 shadow-[0_0_15px_rgba(16,185,129,0.4)]">3</div>
+                    <div class="w-12 h-12 shrink-0 mx-auto bg-gray-900 border-2 border-emerald-400 rounded-full flex items-center justify-center font-bold text-white mb-4 shadow-[0_0_15px_rgba(16,185,129,0.4)]">3</div>
                     <h3 class="text-lg font-bold text-white mb-2">Development</h3>
                     <p class="text-gray-400 text-sm">Building out your custom, high-performance digital space from scratch.</p>
                 </div>
                 
                 <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl text-center relative z-10 hover:border-amber-400 transition-colors duration-300">
-                    <div class="w-12 h-12 mx-auto bg-gray-900 border-2 border-amber-400 rounded-full flex items-center justify-center font-bold text-white mb-4 shadow-[0_0_15px_rgba(251,191,36,0.4)]">4</div>
+                    <div class="w-12 h-12 shrink-0 mx-auto bg-gray-900 border-2 border-amber-400 rounded-full flex items-center justify-center font-bold text-white mb-4 shadow-[0_0_15px_rgba(251,191,36,0.4)]">4</div>
                     <h3 class="text-lg font-bold text-white mb-2">Launch</h3>
                     <p class="text-gray-400 text-sm">Final deployment, thorough testing, and officially handing over the keys.</p>
                 </div>
             </div>
-            
         </section>
 
-        <section id="faq" class="py-16">
+        <section id="faq" class="py-12 md:py-16">
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Common Questions</h2>
-                <div class="w-20 h-1 bg-custom-blue mx-auto rounded-full"></div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Common Questions</h2>
+                <div class="w-16 md:w-20 h-1 bg-custom-blue mx-auto rounded-full"></div>
             </div>
             <div class="max-w-3xl mx-auto flex flex-col space-y-4">
-                
                 <div class="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden transition-all duration-300">
-                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors">
-                        <span>Who will be my main point of contact?</span>
-                        <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300"></i>
+                    <button class="faq-btn w-full px-4 md:px-6 py-4 md:py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors text-sm md:text-base">
+                        <span class="pr-4">Who will be my main point of contact?</span>
+                        <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300 shrink-0"></i>
                     </button>
-                    <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
+                    <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
                         Miss Web is a cohesive team of developers, business analysts, and project managers. To keep things simple and efficient for you, all communications are streamlined through a single dedicated point of contact. Your assigned manager will relay your vision to our internal team, ensuring nothing gets lost in translation.
                     </div>
                 </div>
 
                 <div class="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden transition-all duration-300">
-                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors">
-                        <span>How do we handle communication and feedback?</span>
-                        <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300"></i>
+                    <button class="faq-btn w-full px-4 md:px-6 py-4 md:py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors text-sm md:text-base">
+                        <span class="pr-4">How do we handle communication and feedback?</span>
+                        <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300 shrink-0"></i>
                     </button>
-                    <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
+                    <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
                         We adapt to whatever works best for you! Whether you prefer quick updates via WhatsApp, scheduled phone calls, face-to-face meetings, or email threads, we establish a communication plan that fits seamlessly into your workflow.
                     </div>
                 </div>
                 
                 <div id="more-faqs" class="hidden flex-col space-y-4">
-                    
                     <div class="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden transition-all duration-300">
-                        <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors">
-                            <span>What will you need from me to get started?</span>
-                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300"></i>
+                        <button class="faq-btn w-full px-4 md:px-6 py-4 md:py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors text-sm md:text-base">
+                            <span class="pr-4">What will you need from me to get started?</span>
+                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300 shrink-0"></i>
                         </button>
-                        <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
+                        <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
                             To kick things off, we usually need your logo, brand guidelines (if any), any specific text content or images you want included, and a general idea of your goals. Don't worry if you don't have everything ready—we can help guide you through content creation!
                         </div>
                     </div>
 
                     <div class="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden transition-all duration-300">
-                        <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors">
-                            <span>How do you approach SEO and site performance?</span>
-                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300"></i>
+                        <button class="faq-btn w-full px-4 md:px-6 py-4 md:py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors text-sm md:text-base">
+                            <span class="pr-4">How do you approach SEO and site performance?</span>
+                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300 shrink-0"></i>
                         </button>
-                        <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
+                        <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
                             Performance and SEO are built into our foundation, not added as an afterthought. We ensure your site is blazingly fast, optimized for search engines (with proper meta tags, clean code, and fast load times), and structured to rank well right out of the box.
                         </div>
                     </div>
 
                     <div class="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden transition-all duration-300">
-                        <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors">
-                            <span>Will the website be responsive and accessible?</span>
-                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300"></i>
+                        <button class="faq-btn w-full px-4 md:px-6 py-4 md:py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors text-sm md:text-base">
+                            <span class="pr-4">Will the website be responsive and accessible?</span>
+                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300 shrink-0"></i>
                         </button>
-                        <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
+                        <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
                             Absolutely. Every digital space we build is fully responsive, meaning it will look and function flawlessly on desktops, tablets, and smartphones. We also adhere to modern web accessibility standards so all users can navigate your site smoothly.
                         </div>
                     </div>
 
                     <div class="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden transition-all duration-300">
-                        <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors">
-                            <span>What security measures do you implement?</span>
-                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300"></i>
+                        <button class="faq-btn w-full px-4 md:px-6 py-4 md:py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors text-sm md:text-base">
+                            <span class="pr-4">What security measures do you implement?</span>
+                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300 shrink-0"></i>
                         </button>
-                        <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
+                        <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
                             Security is a top priority. We implement SSL certificates for encrypted connections, secure database integrations, and robust server architectures to protect your site against vulnerabilities and keep user data safe.
                         </div>
                     </div>
 
                     <div class="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden transition-all duration-300">
-                        <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors">
-                            <span>How long does a typical business website take?</span>
-                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300"></i>
+                        <button class="faq-btn w-full px-4 md:px-6 py-4 md:py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors text-sm md:text-base">
+                            <span class="pr-4">How long does a typical business website take?</span>
+                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300 shrink-0"></i>
                         </button>
-                        <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
+                        <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
                             Depending on the complexity, a standard business website takes between 2 to 4 weeks from discovery to launch. Custom web applications may take longer based on the specific logic and features required.
                         </div>
                     </div>
                     
                     <div class="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden transition-all duration-300">
-                        <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors">
-                            <span>Do I own the website code after it's built?</span>
-                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300"></i>
+                        <button class="faq-btn w-full px-4 md:px-6 py-4 md:py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors text-sm md:text-base">
+                            <span class="pr-4">Do I own the website code after it's built?</span>
+                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300 shrink-0"></i>
                         </button>
-                        <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
+                        <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
                             Yes! Once the project is fully paid and launched, you have 100% ownership of your website and its codebase. If requested, we will transfer all necessary files and credentials directly to you.
                         </div>
                     </div>
 
                     <div class="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden transition-all duration-300">
-                        <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors">
-                            <span>What happens if I want to update something later?</span>
-                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300"></i>
+                        <button class="faq-btn w-full px-4 md:px-6 py-4 md:py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none hover:bg-gray-700/50 transition-colors text-sm md:text-base">
+                            <span class="pr-4">What happens if I want to update something later?</span>
+                            <i class="fas fa-chevron-down text-custom-light-blue transition-transform duration-300 shrink-0"></i>
                         </button>
-                        <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
+                        <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-5 text-gray-400 text-sm leading-relaxed border-t border-gray-700/50 pt-3">
                             If you are on our "Self-Managed" or "Free-tier" packages, we offer an hourly rate for future maintenance or structural updates. If you choose the "Miss Web Managed" package, minor content updates and routine maintenance are already included in your monthly subscription.
                         </div>
                     </div>
@@ -477,63 +551,70 @@
             </div>
         </section>
 
-        <section id="reviews" class="py-16">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Client Love</h2>
-                <div class="w-20 h-1 bg-custom-blue mx-auto rounded-full"></div>
+        <section id="reviews" class="py-12 md:py-16">
+            <div class="text-center mb-8 md:mb-10">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Client Love</h2>
+                <div class="w-16 md:w-20 h-1 bg-custom-blue mx-auto rounded-full"></div>
             </div>
+            
+            <!-- Restructured Component to Avoid 4-Sided Clip -->
             <div id="reviews-container" class="carousel-container">
                 <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
-                <div class="carousel-track" id="reviews-track"></div>
+                
+                <div class="carousel-viewport">
+                    <div class="carousel-track" id="reviews-track"></div>
+                </div>
+                
                 <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
                 <div class="carousel-dots" id="reviews-dots"></div>
             </div>
+            
             <div class="text-center mt-6">
                 <button onclick="openModal('review-modal')" class="text-sm font-semibold text-white border border-gray-600 rounded-full px-6 py-2.5 hover:bg-gray-800 transition">Leave a Review</button>
             </div>
         </section>
 
-        <section id="contact" class="py-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Initiate Your Project</h2>
-            <div class="max-w-2xl mx-auto bg-gray-800/80 backdrop-blur-md p-8 md:p-10 rounded-3xl shadow-2xl border border-gray-700 relative overflow-hidden">
+        <section id="contact" class="py-12 md:py-16">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-10">Initiate Your Project</h2>
+    <div class="max-w-2xl mx-auto bg-gray-800/80 backdrop-blur-md p-6 md:p-10 rounded-3xl shadow-2xl border border-gray-700 relative">
                 <div id="contact-message" class="mb-4 hidden"><div class="bg-green-500/20 border border-green-500 text-green-400 p-4 rounded-xl text-center font-medium"></div></div>
                 
-                <div class="bg-custom-blue/10 p-5 rounded-xl mb-8 text-sm text-gray-300 border border-custom-blue/20 flex items-start space-x-3">
+                <div class="bg-custom-blue/10 p-4 md:p-5 rounded-xl mb-8 text-xs md:text-sm text-gray-300 border border-custom-blue/20 flex items-start space-x-3">
                     <i class="fas fa-lightbulb text-custom-light-blue mt-1 flex-shrink-0"></i>
                     <p>This is an initial brief to provide a conceptual overview of your goals. Our next step will be to connect, align visions, and map out the exact technical requirements.</p>
                 </div>
 
                 <form id="contact-form" class="space-y-6">
-                    <div class="flex justify-between items-center mb-6 px-2">
+                    <div class="flex justify-between items-center mb-6 px-1 md:px-2">
                         <div class="flex flex-col text-center w-1/2">
                             <span id="step-1-dot" class="w-8 h-8 mx-auto bg-custom-blue text-white rounded-full flex items-center justify-center font-bold text-sm mb-1 shadow-[0_0_10px_rgba(85,172,238,0.5)] transition-all">1</span>
-                            <span class="text-xs text-gray-400 font-semibold">Your Info</span>
+                            <span class="text-[10px] md:text-xs text-gray-400 font-semibold uppercase tracking-wider">Your Info</span>
                         </div>
                         <div class="w-full h-1 bg-gray-700 mx-2 rounded">
                             <div id="progress-bar" class="h-full bg-custom-blue w-0 transition-all duration-500 rounded"></div>
                         </div>
                         <div class="flex flex-col text-center w-1/2">
                             <span id="step-2-dot" class="w-8 h-8 mx-auto bg-gray-700 text-gray-400 rounded-full flex items-center justify-center font-bold text-sm mb-1 transition-all">2</span>
-                            <span class="text-xs text-gray-400 font-semibold">Project Specs</span>
+                            <span class="text-[10px] md:text-xs text-gray-400 font-semibold uppercase tracking-wider">Project Specs</span>
                         </div>
                     </div>
 
                     <div id="form-step-1" class="space-y-5 animate-fade-in">
                         <div class="relative">
-                            <input type="text" id="name" name="name" class="peer w-full bg-gray-900 border border-gray-700 rounded-xl p-4 pt-6 focus:outline-none focus:border-custom-blue text-white placeholder-transparent transition-colors" placeholder="Name" required>
-                            <label for="name" class="peer-label absolute left-4 top-4 text-gray-500 text-base transition-all pointer-events-none">Full Name *</label>
+                            <input type="text" id="name" name="name" class="peer w-full bg-gray-900 border border-gray-700 rounded-xl p-4 pt-6 focus:outline-none focus:border-custom-blue text-white text-base placeholder-transparent transition-colors" placeholder="Name" required>
+                            <label for="name" class="peer-label absolute left-4 top-4 text-gray-500 text-sm md:text-base transition-all pointer-events-none">Full Name *</label>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div class="relative">
-                                <input type="email" id="email" name="email" class="peer w-full bg-gray-900 border border-gray-700 rounded-xl p-4 pt-6 focus:outline-none focus:border-custom-blue text-white placeholder-transparent transition-colors" placeholder="Email" required>
-                                <label for="email" class="peer-label absolute left-4 top-4 text-gray-500 text-base transition-all pointer-events-none">Email Address *</label>
+                                <input type="email" id="email" name="email" class="peer w-full bg-gray-900 border border-gray-700 rounded-xl p-4 pt-6 focus:outline-none focus:border-custom-blue text-white text-base placeholder-transparent transition-colors" placeholder="Email" required>
+                                <label for="email" class="peer-label absolute left-4 top-4 text-gray-500 text-sm md:text-base transition-all pointer-events-none">Email Address *</label>
                             </div>
                             <div class="relative">
-                                <input type="tel" id="phone" name="phone" class="peer w-full bg-gray-900 border border-gray-700 rounded-xl p-4 pt-6 focus:outline-none focus:border-custom-blue text-white placeholder-transparent transition-colors" placeholder="Phone" required>
-                                <label for="phone" class="peer-label absolute left-4 top-4 text-gray-500 text-base transition-all pointer-events-none">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" class="peer w-full bg-gray-900 border border-gray-700 rounded-xl p-4 pt-6 focus:outline-none focus:border-custom-blue text-white text-base placeholder-transparent transition-colors" placeholder="Phone" required>
+                                <label for="phone" class="peer-label absolute left-4 top-4 text-gray-500 text-sm md:text-base transition-all pointer-events-none">Phone Number *</label>
                             </div>
                         </div>
-                        <button type="button" onclick="nextFormStep()" class="w-full bg-white text-gray-900 font-bold py-4 rounded-xl hover:bg-gray-200 transition mt-4 flex items-center justify-center">
+                        <button type="button" onclick="nextFormStep()" class="w-full bg-white text-gray-900 font-bold py-4 rounded-xl hover:bg-gray-200 transition mt-4 flex items-center justify-center text-sm md:text-base">
                             Continue <i class="fas fa-arrow-right ml-2"></i>
                         </button>
                     </div>
@@ -541,16 +622,16 @@
                     <div id="form-step-2" class="space-y-5 hidden animate-fade-in">
                         <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center">
                             <div>
-                                <p class="text-xs text-gray-400 mb-1">Selected Tier</p>
-                                <input type="text" id="selected_package" name="selected_package" class="bg-transparent text-white font-bold focus:outline-none w-full" readonly placeholder="No package selected">
+                                <p class="text-[10px] md:text-xs text-gray-400 mb-1">Selected Tier</p>
+                                <input type="text" id="selected_package" name="selected_package" class="bg-transparent text-white text-sm md:text-base font-bold focus:outline-none w-full" readonly placeholder="No package selected">
                             </div>
-                            <button type="button" id="select-package-btn" class="text-xs bg-gray-800 border border-gray-600 px-3 py-1.5 rounded hover:bg-gray-700 transition text-custom-light-blue whitespace-nowrap">Choose</button>
+                            <button type="button" id="select-package-btn" class="text-[10px] md:text-xs bg-gray-800 border border-gray-600 px-3 py-1.5 rounded hover:bg-gray-700 transition text-custom-light-blue whitespace-nowrap">Choose</button>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-xs text-gray-400 mb-2 pl-1">App Type</label>
-                                <select id="app_type" name="app_type" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3.5 text-sm text-white focus:border-custom-blue outline-none">
+                                <select id="app_type" name="app_type" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3.5 text-sm md:text-base text-white focus:border-custom-blue outline-none">
                                     <option value="Personal Website">Personal Website</option>
                                     <option value="Business Website">Business Website</option>
                                     <option value="E Commerce Store">E-commerce Store</option>
@@ -559,7 +640,7 @@
                             </div>
                             <div>
                                 <label class="block text-xs text-gray-400 mb-2 pl-1">Domain Type</label>
-                                <select id="domain_type" name="domain_type" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3.5 text-sm text-white focus:border-custom-blue outline-none">
+                                <select id="domain_type" name="domain_type" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3.5 text-sm md:text-base text-white focus:border-custom-blue outline-none">
                                     <option value="Free-tier subdomain">Free Subdomain</option>
                                     <option value=".co.za">.co.za</option>
                                     <option value=".com">.com</option>
@@ -568,7 +649,7 @@
                             </div>
                             <div>
                                 <label class="block text-xs text-gray-400 mb-2 pl-1">Hosting</label>
-                                <select id="hosting_type" name="hosting_type" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3.5 text-sm text-white focus:border-custom-blue outline-none">
+                                <select id="hosting_type" name="hosting_type" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3.5 text-sm md:text-base text-white focus:border-custom-blue outline-none">
                                     <option value="Free Hosting">Free Hosting</option>
                                     <option value="Subscription Option">Premium (Sub)</option>
                                 </select>
@@ -576,37 +657,38 @@
                         </div>
                         
                         <div id="custom-domain-container" class="hidden relative">
-                            <input type="text" id="custom_domain" name="custom_domain" class="peer w-full bg-gray-900 border border-gray-700 rounded-xl p-4 pt-6 focus:outline-none focus:border-custom-blue text-white placeholder-transparent" placeholder="Domain">
-                            <label for="custom_domain" class="peer-label absolute left-4 top-4 text-gray-500 text-base transition-all pointer-events-none">Specify domain name</label>
+                            <input type="text" id="custom_domain" name="custom_domain" class="peer w-full bg-gray-900 border border-gray-700 rounded-xl p-4 pt-6 focus:outline-none focus:border-custom-blue text-white text-base placeholder-transparent" placeholder="Domain">
+                            <label for="custom_domain" class="peer-label absolute left-4 top-4 text-gray-500 text-sm md:text-base transition-all pointer-events-none">Specify domain name</label>
                         </div>
 
                         <div class="relative">
-                            <textarea id="specs" name="specs" rows="3" class="peer w-full bg-gray-900 border border-gray-700 rounded-xl p-4 pt-6 focus:outline-none focus:border-custom-blue text-white placeholder-transparent" placeholder="Specs" required></textarea>
-                            <label for="specs" class="peer-label absolute left-4 top-4 text-gray-500 text-base transition-all pointer-events-none">Project Concept / Specifications *</label>
+                            <textarea id="specs" name="specs" rows="3" class="peer w-full bg-gray-900 border border-gray-700 rounded-xl p-4 pt-6 focus:outline-none focus:border-custom-blue text-white text-base placeholder-transparent" placeholder="Specs" required></textarea>
+                            <label for="specs" class="peer-label absolute left-4 top-4 text-gray-500 text-sm md:text-base transition-all pointer-events-none">Project Concept / Specifications *</label>
                         </div>
                         
                         <div class="flex space-x-3 pt-2">
-                            <button type="button" onclick="prevFormStep()" class="w-1/3 bg-gray-700 text-white font-bold py-4 rounded-xl hover:bg-gray-600 transition">Back</button>
-                            <button type="submit" class="w-2/3 bg-custom-blue text-white font-bold py-4 rounded-xl hover:bg-opacity-90 shadow-[0_0_15px_rgba(85,172,238,0.4)] transition">Submit Inquiry</button>
+                            <button type="button" onclick="prevFormStep()" class="w-1/3 bg-gray-700 text-white font-bold py-4 rounded-xl hover:bg-gray-600 transition text-sm md:text-base">Back</button>
+                            <button type="submit" class="w-2/3 bg-custom-blue text-white font-bold py-4 rounded-xl hover:bg-opacity-90 shadow-[0_0_15px_rgba(85,172,238,0.4)] transition text-sm md:text-base">Submit Inquiry</button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="flex flex-col sm:flex-row items-center justify-center mt-10 space-y-4 sm:space-y-0 sm:space-x-8 text-sm font-medium">
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center mt-10 space-y-4 sm:space-y-0 sm:space-x-8 text-sm md:text-base font-medium">
                 <div class="flex items-center space-x-2"><i class="fas fa-phone text-custom-light-blue"></i><span>+27 78 818 8487</span></div>
                 <div class="flex items-center space-x-2"><i class="fas fa-envelope text-custom-light-blue"></i><span>misswebinfo@gmail.com</span></div>
-                <div class="flex space-x-5">
-                    <a href="https://www.facebook.com/people/MissWeb/61588824191994/" target="_blank" class="text-gray-400 hover:text-custom-light-blue transition"><i class="fab fa-facebook-f text-lg"></i></a>
-                    <a href="https://www.instagram.com/misswebstudioza" target="_blank" class="text-gray-400 hover:text-custom-light-blue transition"><i class="fab fa-instagram text-lg"></i></a>
-                    <a href="https://www.tiktok.com/@misswebstudioza" target="_blank" class="text-gray-400 hover:text-custom-light-blue transition"><i class="fab fa-tiktok text-lg"></i></a>
-                    <a href="https://wa.me/27788188487" target="_blank" class="text-gray-400 hover:text-custom-light-blue transition"><i class="fab fa-whatsapp text-lg"></i></a>
+                <div class="flex space-x-6 sm:space-x-5 pt-2 sm:pt-0">
+                    <a href="https://www.facebook.com/people/MissWeb/61588824191994/" target="_blank" class="text-gray-400 hover:text-custom-light-blue transition"><i class="fab fa-facebook-f text-xl sm:text-lg"></i></a>
+                    <a href="https://www.instagram.com/misswebstudioza" target="_blank" class="text-gray-400 hover:text-custom-light-blue transition"><i class="fab fa-instagram text-xl sm:text-lg"></i></a>
+                    <a href="https://www.tiktok.com/@misswebstudioza" target="_blank" class="text-gray-400 hover:text-custom-light-blue transition"><i class="fab fa-tiktok text-xl sm:text-lg"></i></a>
+                    <a href="https://wa.me/27788188487" target="_blank" class="text-gray-400 hover:text-custom-light-blue transition"><i class="fab fa-whatsapp text-xl sm:text-lg"></i></a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="bg-black py-8 text-center border-t border-gray-900">
-        <p class="text-gray-500 text-sm">&copy; 2026 Miss Web Studio. All Rights Reserved.</p>
+        <p class="text-gray-500 text-xs md:text-sm">&copy; 2026 Miss Web Studio. All Rights Reserved.</p>
     </footer>
 </div>
 
@@ -627,6 +709,25 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+
+    // ==================== MOBILE MENU TOGGLE ====================
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+    }
 
     // ==================== MODALS & SUBSCRIPTION HUB ====================
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
@@ -697,7 +798,7 @@
             const btnIcon = toggleFaqBtn.querySelector('i');
 
             moreFaqs.classList.toggle('hidden');
-            moreFaqs.classList.toggle('flex'); // Add flex to maintain proper spacing when visible
+            moreFaqs.classList.toggle('flex'); 
 
             if (moreFaqs.classList.contains('hidden')) {
                 btnText.textContent = 'Show More Questions';
@@ -805,7 +906,7 @@
         }
     });
 
-    // ==================== CAROUSEL CREATOR (Adaptive Grid/Carousel) ====================
+    // ==================== CAROUSEL CREATOR ====================
     function createCarousel(containerId, isPortfolio) {
         const container = document.getElementById(containerId);
         if (!container) return null;
@@ -878,10 +979,10 @@
                 const stars = '★'.repeat(data.rating || 5) + '☆'.repeat(5-(data.rating||5));
                 track.innerHTML += `
                 <div class="carousel-item">
-                    <div class="bg-gray-800/80 backdrop-blur border border-gray-700 p-8 rounded-2xl h-full shadow-lg">
+                    <div class="bg-gray-800/80 backdrop-blur border border-gray-700 p-6 md:p-8 rounded-2xl h-full shadow-lg">
                         <div class="text-custom-gold mb-3 text-lg">${stars}</div>
-                        <p class="text-gray-300 italic mb-6">"${data.review}"</p>
-                        <p class="font-bold text-white">${data.reviewer}</p>
+                        <p class="text-gray-300 italic mb-6 text-sm md:text-base">"${data.review}"</p>
+                        <p class="font-bold text-white text-sm md:text-base">${data.reviewer}</p>
                         ${data.website ? `<a href="${data.website}" target="_blank" class="text-xs text-custom-light-blue hover:underline">View Site</a>` : ''}
                     </div>
                 </div>`;
@@ -919,7 +1020,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-       // createCarousel('portfolio-container', true);
         loadReviews();
         setupNavHighlighting();
     });
@@ -951,7 +1051,7 @@
         if (result.success) {
             msgDiv.innerHTML = `<div class="bg-green-500/20 border border-green-500 text-green-400 p-3 rounded-lg">${result.message}</div>`;
             form.reset();
-            loadReviews();   // refresh the carousel with new review
+            loadReviews();   
             setTimeout(() => closeModal('review-modal'), 2000);
         } else {
             msgDiv.innerHTML = `<div class="bg-red-500/20 border border-red-500 text-red-400 p-3 rounded-lg">${result.message}</div>`;
